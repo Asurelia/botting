@@ -1,0 +1,82 @@
+# Fichiers de configuration sensibles
+.env
+.env.local
+.env.production
+*.key
+*.pem
+config/secrets.yaml
+config/user_*.yaml
+
+# Base de données
+*.db
+*.sqlite
+*.sqlite3
+data/databases/*.db
+data/backups/
+logs/*.log
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environnements virtuels
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Screenshots et captures
+screenshots/
+captures/
+temp_images/
+
+# Logs et rapports
+*.log
+reports/
+profiling/
+
+# Claude issues tracker
+.claude-issues.json
+
+# Données temporaires
+temp/
+tmp/
+cache/

@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "last_saved": "2025-08-31 10:00:49",
+  "global_stats": {
+    "total_play_time": 0.5,
+    "total_xp_gained": 3900,
+    "total_kamas_earned": 10389,
+    "sessions_completed": 1,
+    "best_hourly_xp": 7800,
+    "best_hourly_kamas": 20778
+  },
+  "professions": {
+    "farmer": {
+      "level": 4,
+      "experience": 2436,
+      "total_harvested": 0,
+      "total_crafted": 0,
+      "kamas_earned": 7613,
+      "time_spent": 908.6999939379098,
+      "inventory_capacity": 1000,
+      "auto_bank": true,
+      "auto_craft": false,
+      "preferred_resources": [],
+      "blacklisted_resources": []
+    },
+    "lumberjack": {
+      "level": 1,
+      "experience": 259,
+      "total_harvested": 0,
+      "total_crafted": 0,
+      "kamas_earned": 249,
+      "time_spent": 164.4121125874636,
+      "inventory_capacity": 1000,
+      "auto_bank": true,
+      "auto_craft": false,
+      "preferred_resources": [],
+      "blacklisted_resources": [],
+      "current_tool": "hache_debutant"
+    },
+    "miner": {
+      "level": 2,
+      "experience": 554,
+      "total_harvested": 0,
+      "total_crafted": 0,
+      "kamas_earned": 792,
+      "time_spent": 293.0193411488631,
+      "inventory_capacity": 1000,
+      "auto_bank": true,
+      "auto_craft": false,
+      "preferred_resources": [],
+      "blacklisted_resources": [],
+      "current_tool": "pioche_debutant"
+    },
+    "alchemist": {
+      "level": 2,
+      "experience": 651,
+      "total_harvested": 0,
+      "total_crafted": 0,
+      "kamas_earned": 1735,
+      "time_spent": 433.86855232576346,
+      "inventory_capacity": 1000,
+      "auto_bank": true,
+      "auto_craft": false,
+      "preferred_resources": [],
+      "blacklisted_resources": [],
+      "workshop_level": 1
+    }
+  }
+}
