@@ -1,0 +1,133 @@
+# ====================================
+# Dépendances Python pour DOFUS Bot
+# ====================================
+# Version: 1.0.0
+# Créé le: 2025-08-31
+
+# Core dependencies
+pyyaml>=6.0.1              # Configuration YAML
+sqlite3                    # Base de données (built-in Python)
+pathlib                    # Gestion des chemins (built-in Python)
+logging                    # Logging (built-in Python)
+json                       # JSON (built-in Python)
+hashlib                    # Hash (built-in Python)
+shutil                     # Utilitaires fichiers (built-in Python)
+datetime                   # Date/time (built-in Python)
+typing                     # Type hints (built-in Python)
+
+# Vision and Screen Capture
+opencv-python>=4.8.0       # Computer vision et template matching
+pillow>=10.0.0             # Manipulation d'images
+mss>=9.0.1                 # Screenshot rapide multi-plateforme
+pytesseract>=0.3.10        # OCR (Optical Character Recognition)
+numpy>=1.24.0              # Support numérique pour OpenCV
+
+# GUI Automation
+pyautogui>=0.9.54          # Automation souris/clavier
+pynput>=1.7.6              # Monitoring input utilisateur
+keyboard>=0.13.5           # Gestion clavier avancée
+mouse>=0.7.1               # Gestion souris avancée
+
+# Network and Web
+requests>=2.31.0           # Requêtes HTTP
+aiohttp>=3.8.0             # Client HTTP asynchrone
+websockets>=11.0           # WebSocket client/server
+urllib3>=2.0.0             # Utilitaires HTTP bas niveau
+
+# Data Processing
+pandas>=2.0.0              # Analyse de données (pour market analyzer)
+scipy>=1.11.0              # Calculs scientifiques
+scikit-learn>=1.3.0        # Machine learning (pour l'IA de combat)
+
+# Threading and Async
+asyncio                    # Programmation asynchrone (built-in Python)
+threading                  # Threading (built-in Python)
+concurrent.futures         # Futures (built-in Python)
+queue                      # Queues thread-safe (built-in Python)
+
+# System and OS
+psutil>=5.9.0              # Informations système
+watchdog>=3.0.0            # Surveillance fichiers
+schedule>=1.2.0            # Planificateur de tâches
+
+# Crypto and Security
+cryptography>=41.0.0       # Chiffrement des données sensibles
+bcrypt>=4.0.0              # Hash de mots de passe
+
+# Configuration and Environment
+python-dotenv>=1.0.0       # Variables d'environnement (.env)
+configparser               # Configuration ini (built-in Python)
+argparse                   # Arguments ligne de commande (built-in Python)
+
+# Logging and Monitoring
+colorlog>=6.7.0            # Logs colorés
+structlog>=23.1.0          # Logs structurés
+
+# Development and Testing
+pytest>=7.4.0             # Framework de tests
+pytest-asyncio>=0.21.0    # Tests asynchrones
+pytest-cov>=4.1.0         # Coverage des tests
+black>=23.0.0              # Formatage de code
+flake8>=6.0.0              # Linting
+mypy>=1.5.0                # Type checking
+
+# Documentation
+sphinx>=7.0.0              # Génération documentation
+sphinx-rtd-theme>=1.3.0    # Thème documentation
+
+# Optional: Database alternatives (si besoin)
+# sqlalchemy>=2.0.0        # ORM base de données
+# alembic>=1.11.0          # Migrations base de données
+
+# Optional: Advanced ML/AI (si IA avancée)
+# tensorflow>=2.13.0       # Deep learning
+# torch>=2.0.0             # PyTorch
+
+# GUI Development (requis pour les interfaces)
+# tkinter                  # Interface graphique (built-in Python)
+matplotlib>=3.7.0        # Graphiques et visualisations (pour monitoring)
+flask>=2.3.0             # Serveur web (pour dashboard web)
+pygetwindow>=0.0.9       # Détection de fenêtres système
+# pyqt6>=6.5.0            # Qt framework pour Python (optionnel)
+# kivy>=2.2.0             # Framework GUI moderne (optionnel)
+
+# Optional: Game-specific libraries
+# pydirectinput>=1.0.4     # DirectInput pour les jeux
+# win32api                 # Windows API (via pywin32)
+# pywin32>=306             # Windows API complet
+
+# Optional: Performance monitoring
+# memory-profiler>=0.61.0  # Profiling mémoire
+# line-profiler>=4.0.0     # Profiling ligne par ligne
+
+# ==================================
+# Notes d'installation:
+# ==================================
+# 
+# Pour installer toutes les dépendances:
+#   pip install -r requirements.txt
+#
+# Pour mettre à jour:
+#   pip install --upgrade -r requirements.txt
+#
+# Pour une installation minimale (core seulement):
+#   pip install pyyaml opencv-python pillow mss pytesseract numpy pyautogui requests
+#
+# Dépendances système requises:
+# - Tesseract OCR: https://github.com/tesseract-ocr/tesseract
+# - Visual C++ Redistributable (Windows)
+#
+# Commandes post-installation:
+# 1. Configurer Tesseract:
+#    - Windows: Ajouter C:\Program Files\Tesseract-OCR au PATH
+#    - Linux: sudo apt-get install tesseract-ocr tesseract-ocr-fra
+#    - macOS: brew install tesseract tesseract-lang
+#
+# 2. Vérifier l'installation:
+#    python -c "import cv2, pytesseract, yaml, mss; print('✅ Installation réussie')"
+#
+# ==================================
+# Versions Python supportées:
+# ==================================
+# Python >= 3.8 (recommandé: Python 3.11+)
+# Compatible Windows, Linux, macOS
