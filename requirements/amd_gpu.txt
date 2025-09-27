@@ -5,11 +5,11 @@
 torch>=2.0.0
 torchvision>=0.15.0
 torchaudio>=2.0.0
-torch-directml>=0.2.0
+# torch-directml>=0.2.0
 
 # ONNX Runtime pour optimisation
 onnxruntime-directml>=1.16.0
 onnx>=1.14.0
 
 # Alternative TensorFlow avec DirectML (optionnel)
-tensorflow-directml>=1.15.8
+# tensorflow-directml>=1.15.8
