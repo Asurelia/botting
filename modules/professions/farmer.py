@@ -21,6 +21,15 @@ class Farmer(BaseProfession):
             'cluster': self._cluster_pattern
         }
         self.current_pattern = 'cluster'
+    
+    def initialize(self, config: Dict) -> bool:
+        """Initialise le module Farmer"""
+        try:
+            # Initialisation basique, peut être étendue selon les besoins
+            return True
+        except Exception as e:
+            print(f"[ERROR] Erreur initialisation Farmer: {e}")
+            return False
         
     def load_resources(self) -> None:
         """Charge toutes les ressources agricoles"""

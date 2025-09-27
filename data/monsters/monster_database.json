@@ -1,0 +1,382 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-01-15",
+    "description": "Base de données complète des monstres DOFUS",
+    "author": "IA DOFUS Évolutive"
+  },
+  "categories": {
+    "low_level": {
+      "name": "Monstres Niveau 1-50",
+      "recommended_level_range": [1, 50],
+      "monsters": {
+        "piou": {
+          "id": "piou",
+          "name": "Piou",
+          "level": 1,
+          "health": 20,
+          "ap": 6,
+          "mp": 3,
+          "resistances": {
+            "neutral": 0,
+            "earth": 0,
+            "fire": 0,
+            "water": 0,
+            "air": 0
+          },
+          "damages": {
+            "min": 3,
+            "max": 8,
+            "element": "neutral"
+          },
+          "locations": [
+            {"map": "Île d'Incarnam", "coordinates": [0, 0], "spawn_rate": 0.9},
+            {"map": "Plage d'Incarnam", "coordinates": [1, 1], "spawn_rate": 0.8}
+          ],
+          "drops": [
+            {"item": "Plume de Piou", "rate": 0.6, "value": 2},
+            {"item": "Bec de Piou", "rate": 0.3, "value": 5}
+          ],
+          "xp_reward": 5,
+          "kamas_reward": 3,
+          "difficulty": "very_easy",
+          "ai_behavior": "passive",
+          "spell_list": ["Coup de Bec"],
+          "special_abilities": []
+        },
+        "larve_bleue": {
+          "id": "larve_bleue",
+          "name": "Larve Bleue",
+          "level": 5,
+          "health": 45,
+          "ap": 6,
+          "mp": 3,
+          "resistances": {
+            "neutral": 0,
+            "earth": 10,
+            "fire": -15,
+            "water": 20,
+            "air": 0
+          },
+          "damages": {
+            "min": 8,
+            "max": 15,
+            "element": "water"
+          },
+          "locations": [
+            {"map": "Champs d'Astrub", "coordinates": [4, -18], "spawn_rate": 0.7},
+            {"map": "Forêt d'Astrub", "coordinates": [5, -19], "spawn_rate": 0.6}
+          ],
+          "drops": [
+            {"item": "Soie de Larve", "rate": 0.5, "value": 8},
+            {"item": "Bave de Larve", "rate": 0.7, "value": 3}
+          ],
+          "xp_reward": 15,
+          "kamas_reward": 8,
+          "difficulty": "easy",
+          "ai_behavior": "defensive",
+          "spell_list": ["Jet de Bave", "Morsure"],
+          "special_abilities": ["poison_weak"]
+        },
+        "bouftou": {
+          "id": "bouftou",
+          "name": "Bouftou",
+          "level": 10,
+          "health": 85,
+          "ap": 6,
+          "mp": 3,
+          "resistances": {
+            "neutral": 5,
+            "earth": 15,
+            "fire": 0,
+            "water": 0,
+            "air": -10
+          },
+          "damages": {
+            "min": 12,
+            "max": 22,
+            "element": "earth"
+          },
+          "locations": [
+            {"map": "Champs d'Astrub", "coordinates": [5, -20], "spawn_rate": 0.5},
+            {"map": "Coin des Bouftou", "coordinates": [7, -22], "spawn_rate": 0.8}
+          ],
+          "drops": [
+            {"item": "Laine de Bouftou", "rate": 0.8, "value": 15},
+            {"item": "Langue de Bouftou", "rate": 0.4, "value": 25},
+            {"item": "Queue de Bouftou", "rate": 0.2, "value": 50}
+          ],
+          "xp_reward": 35,
+          "kamas_reward": 18,
+          "difficulty": "easy",
+          "ai_behavior": "aggressive",
+          "spell_list": ["Coup de Tête", "Charge", "Laine Magique"],
+          "special_abilities": ["heal_allies"]
+        },
+        "tofu": {
+          "id": "tofu",
+          "name": "Tofu",
+          "level": 15,
+          "health": 120,
+          "ap": 6,
+          "mp": 4,
+          "resistances": {
+            "neutral": 0,
+            "earth": 0,
+            "fire": 10,
+            "water": -20,
+            "air": 25
+          },
+          "damages": {
+            "min": 15,
+            "max": 28,
+            "element": "air"
+          },
+          "locations": [
+            {"map": "Plaine des Porkass", "coordinates": [0, -4], "spawn_rate": 0.6},
+            {"map": "Élevage de Tofu", "coordinates": [-1, -5], "spawn_rate": 0.9}
+          ],
+          "drops": [
+            {"item": "Plume de Tofu", "rate": 0.7, "value": 12},
+            {"item": "Œuf de Tofu", "rate": 0.3, "value": 40},
+            {"item": "Cuisse de Tofu", "rate": 0.5, "value": 20}
+          ],
+          "xp_reward": 55,
+          "kamas_reward": 25,
+          "difficulty": "easy",
+          "ai_behavior": "mobile",
+          "spell_list": ["Coup de Griffe", "Vent de Folie", "Fuite"],
+          "special_abilities": ["high_mobility"]
+        }
+      }
+    },
+    "medium_level": {
+      "name": "Monstres Niveau 51-100",
+      "recommended_level_range": [51, 100],
+      "monsters": {
+        "bwork_mage": {
+          "id": "bwork_mage",
+          "name": "Bwork Mage",
+          "level": 60,
+          "health": 450,
+          "ap": 6,
+          "mp": 3,
+          "resistances": {
+            "neutral": 15,
+            "earth": 30,
+            "fire": 25,
+            "water": 20,
+            "air": 35
+          },
+          "damages": {
+            "min": 35,
+            "max": 65,
+            "element": "fire"
+          },
+          "locations": [
+            {"map": "Village Bwork", "coordinates": [4, 6], "spawn_rate": 0.4},
+            {"map": "Caverne des Bworks", "coordinates": [3, 7], "spawn_rate": 0.6}
+          ],
+          "drops": [
+            {"item": "Œil de Bwork Mage", "rate": 0.4, "value": 150},
+            {"item": "Baguette du Bwork Mage", "rate": 0.1, "value": 800},
+            {"item": "Cape de Bwork Mage", "rate": 0.15, "value": 400}
+          ],
+          "xp_reward": 280,
+          "kamas_reward": 120,
+          "difficulty": "medium",
+          "ai_behavior": "caster",
+          "spell_list": ["Boule de Feu", "Protection Élémentaire", "Téléportation"],
+          "special_abilities": ["elemental_shield", "teleport"]
+        },
+        "craqueleur": {
+          "id": "craqueleur",
+          "name": "Craqueleur",
+          "level": 75,
+          "health": 680,
+          "ap": 6,
+          "mp": 2,
+          "resistances": {
+            "neutral": 25,
+            "earth": 45,
+            "fire": -30,
+            "water": 10,
+            "air": 5
+          },
+          "damages": {
+            "min": 45,
+            "max": 80,
+            "element": "earth"
+          },
+          "locations": [
+            {"map": "Mine des Craqueleurs", "coordinates": [2, 1], "spawn_rate": 0.5},
+            {"map": "Souterrains d'Astrub", "coordinates": [3, 2], "spawn_rate": 0.3}
+          ],
+          "drops": [
+            {"item": "Pierre de Craqueleur", "rate": 0.8, "value": 80},
+            {"item": "Roche de Craqueleur", "rate": 0.5, "value": 180},
+            {"item": "Cœur de Pierre", "rate": 0.1, "value": 1200}
+          ],
+          "xp_reward": 420,
+          "kamas_reward": 180,
+          "difficulty": "medium",
+          "ai_behavior": "tank",
+          "spell_list": ["Lancer de Roche", "Muraille", "Tremblement"],
+          "special_abilities": ["high_defense", "area_damage"]
+        }
+      }
+    },
+    "high_level": {
+      "name": "Monstres Niveau 101-200",
+      "recommended_level_range": [101, 200],
+      "monsters": {
+        "dragon_cochon": {
+          "id": "dragon_cochon",
+          "name": "Dragon Cochon",
+          "level": 150,
+          "health": 2500,
+          "ap": 8,
+          "mp": 4,
+          "resistances": {
+            "neutral": 40,
+            "earth": 30,
+            "fire": 50,
+            "water": 20,
+            "air": 35
+          },
+          "damages": {
+            "min": 120,
+            "max": 200,
+            "element": "fire"
+          },
+          "locations": [
+            {"map": "Antre du Dragon Cochon", "coordinates": [0, 0], "spawn_rate": 1.0}
+          ],
+          "drops": [
+            {"item": "Écaille de Dragon Cochon", "rate": 0.6, "value": 800},
+            {"item": "Souffle du Dragon", "rate": 0.3, "value": 2000},
+            {"item": "Dofus Cochon", "rate": 0.01, "value": 50000}
+          ],
+          "xp_reward": 1800,
+          "kamas_reward": 800,
+          "difficulty": "very_hard",
+          "ai_behavior": "boss",
+          "spell_list": ["Souffle Enflammé", "Charge Dévastatrice", "Régénération"],
+          "special_abilities": ["boss_immunity", "multi_attack", "heal"]
+        }
+      }
+    }
+  },
+  "difficulty_scaling": {
+    "very_easy": {
+      "xp_multiplier": 1.0,
+      "kamas_multiplier": 1.0,
+      "recommended_group_size": 1
+    },
+    "easy": {
+      "xp_multiplier": 1.2,
+      "kamas_multiplier": 1.1,
+      "recommended_group_size": 1
+    },
+    "medium": {
+      "xp_multiplier": 1.5,
+      "kamas_multiplier": 1.3,
+      "recommended_group_size": 2
+    },
+    "hard": {
+      "xp_multiplier": 2.0,
+      "kamas_multiplier": 1.6,
+      "recommended_group_size": 4
+    },
+    "very_hard": {
+      "xp_multiplier": 3.0,
+      "kamas_multiplier": 2.0,
+      "recommended_group_size": 6
+    }
+  },
+  "ai_behaviors": {
+    "passive": {
+      "aggression": 0.2,
+      "mobility": 0.3,
+      "spell_usage": 0.4
+    },
+    "defensive": {
+      "aggression": 0.4,
+      "mobility": 0.4,
+      "spell_usage": 0.6
+    },
+    "aggressive": {
+      "aggression": 0.8,
+      "mobility": 0.6,
+      "spell_usage": 0.7
+    },
+    "mobile": {
+      "aggression": 0.6,
+      "mobility": 0.9,
+      "spell_usage": 0.5
+    },
+    "caster": {
+      "aggression": 0.7,
+      "mobility": 0.4,
+      "spell_usage": 0.9
+    },
+    "tank": {
+      "aggression": 0.5,
+      "mobility": 0.2,
+      "spell_usage": 0.6
+    },
+    "boss": {
+      "aggression": 0.9,
+      "mobility": 0.7,
+      "spell_usage": 0.9
+    }
+  },
+  "special_abilities": {
+    "poison_weak": {
+      "name": "Poison Faible",
+      "duration": 3,
+      "damage_per_turn": 5
+    },
+    "heal_allies": {
+      "name": "Soin des Alliés",
+      "heal_amount": 20,
+      "range": 3
+    },
+    "high_mobility": {
+      "name": "Grande Mobilité",
+      "mp_bonus": 2
+    },
+    "elemental_shield": {
+      "name": "Bouclier Élémentaire",
+      "resistance_bonus": 20,
+      "duration": 5
+    },
+    "teleport": {
+      "name": "Téléportation",
+      "range": 8,
+      "cooldown": 3
+    },
+    "high_defense": {
+      "name": "Haute Défense",
+      "armor_bonus": 30
+    },
+    "area_damage": {
+      "name": "Dégâts de Zone",
+      "radius": 2,
+      "damage_multiplier": 0.8
+    },
+    "boss_immunity": {
+      "name": "Immunité de Boss",
+      "immune_to": ["poison", "stun", "sleep"]
+    },
+    "multi_attack": {
+      "name": "Attaque Multiple",
+      "max_targets": 3
+    },
+    "heal": {
+      "name": "Régénération",
+      "heal_per_turn": 50,
+      "trigger_health": 0.3
+    }
+  }
+}

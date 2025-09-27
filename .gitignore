@@ -6,14 +6,25 @@
 *.pem
 config/secrets.yaml
 config/user_*.yaml
+config/environment_info.json
+config/gpu_config.json
 
 # Base de données
 *.db
 *.sqlite
 *.sqlite3
-data/databases/*.db
+data/databases/
 data/backups/
-logs/*.log
+
+# Données générées
+data/hrm/
+data/knowledge/
+data/predictions/
+
+# Modèles de ML
+models/
+*.pth
+*.onnx
 
 # Cache Python
 __pycache__/
@@ -69,9 +80,10 @@ captures/
 temp_images/
 
 # Logs et rapports
-*.log
+logs/
 reports/
 profiling/
+*.log
 
 # Claude issues tracker
 .claude-issues.json
@@ -80,3 +92,6 @@ profiling/
 temp/
 tmp/
 cache/
+
+# Fichiers problématiques Windows
+nul

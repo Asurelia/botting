@@ -10,7 +10,7 @@ from .base_class import (
     BaseCharacterClass, SpellInfo, SpellCategory, TargetType, 
     CombatAction, TargetEvaluation
 )
-from ....state.realtime_state import Character, CombatEntity, GridPosition
+from state.realtime_state import Character, CombatEntity, GridPosition
 
 
 class IopClass(BaseCharacterClass):

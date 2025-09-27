@@ -10,7 +10,7 @@ from enum import Enum
 import math
 import logging
 
-from ....state.realtime_state import (
+from state.realtime_state import (
     GridPosition, Spell, CombatEntity, CombatState, Character
 )
 

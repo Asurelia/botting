@@ -471,22 +471,84 @@ class SessionManager:
         return False
     
     def _save_session_data(self):
-        """Sauvegarde les données de session"""
+        """Sauvegarde chiffrée des données de session"""
         if not self.save_file:
             return
         
         try:
+            # Sanitisation et validation des données avant sauvegarde
+            sanitized_stats = self._sanitize_session_data(self.daily_stats)
+            
             data = {
-                'daily_stats': self.daily_stats,
+                'daily_stats': sanitized_stats,
                 'limits': asdict(self.limits),
-                'last_save': time.time()
+                'last_save': time.time(),
+                'user_hash': self.user_hash,
+                'version': "1.0",
+                'integrity_check': self._generate_data_integrity_hash(sanitized_stats)
             }
             
-            with open(self.save_file, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
+            # Chiffrement des données sensibles
+            json_data = json.dumps(data, ensure_ascii=False)
+            encrypted_data = self._cipher.encrypt(json_data.encode('utf-8'))
+            
+            # Sauvegarde sécurisée avec permissions restreintes
+            with open(self.save_file, 'wb') as f:
+                f.write(encrypted_data)
+            
+            # Permissions de fichier restrictives (lecture seule pour le propriétaire)
+            import os
+            os.chmod(self.save_file, 0o600)
+            
+            self._log_security_event("session_data_saved", {"file_size": len(encrypted_data)})
                 
         except Exception as e:
-            logger.error(f"Erreur sauvegarde session: {e}")
+            self._log_security_event("save_session_error", {"error": str(e)[:100]})
+            logger.error(f"Erreur sauvegarde session sécurisée: {e}")
+    
+    def _sanitize_session_data(self, data) -> Dict:
+        """Nettoie et valide les données de session"""
+        if not isinstance(data, dict):
+            return {}
+        
+        sanitized = {}
+        for date, sessions in data.items():
+            # Validation du format de date
+            if not isinstance(date, str) or len(date) != 10:
+                continue
+            
+            try:
+                datetime.strptime(date, "%Y-%m-%d")
+            except ValueError:
+                continue
+            
+            # Sanitisation des sessions
+            sanitized_sessions = []
+            for session in sessions:
+                if isinstance(session, dict):
+                    clean_session = {}
+                    # Validation et nettoyage des champs numériques
+                    for key in ['start_time', 'end_time', 'total_active_time', 'total_break_time']:
+                        if key in session and isinstance(session[key], (int, float)) and session[key] >= 0:
+                            clean_session[key] = min(session[key], 86400)  # Max 24h
+                    
+                    # Validation des compteurs
+                    for key in ['breaks_taken', 'actions_performed', 'experience_gained', 'levels_gained']:
+                        if key in session and isinstance(session[key], int) and session[key] >= 0:
+                            clean_session[key] = min(session[key], 1000000)  # Limite raisonnable
+                    
+                    if clean_session:  # Seulement si des données valides
+                        sanitized_sessions.append(clean_session)
+            
+            if sanitized_sessions:
+                sanitized[date] = sanitized_sessions
+        
+        return sanitized
+    
+    def _generate_data_integrity_hash(self, data) -> str:
+        """Génère un hash d'intégrité pour les données"""
+        data_str = json.dumps(data, sort_keys=True)
+        return hashlib.sha256(data_str.encode()).hexdigest()
     
     def _load_session_data(self):
         """Charge les données de session sauvegardées"""

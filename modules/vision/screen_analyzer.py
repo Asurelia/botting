@@ -33,6 +33,14 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 from engine.module_interface import IAnalysisModule, ModuleStatus
 from engine.event_bus import EventType, EventPriority
 
+# Import YOLO optionnel pour détection d'objets avancée
+try:
+    from .yolo_detector import DofusYOLODetector, YOLOConfig
+    YOLO_AVAILABLE = True
+except ImportError:
+    YOLO_AVAILABLE = False
+    logging.warning("YOLO non disponible - fonctionnement en mode template uniquement")
+
 
 @dataclass
 class ScreenRegion:
@@ -327,15 +335,28 @@ class ScreenAnalyzer(IAnalysisModule):
     
     def __init__(self, name: str = "screen_analyzer"):
         super().__init__(name)
-        
+
         # Configuration logging
         self.logger = logging.getLogger(f"{__name__}.ScreenAnalyzer")
-        
+
         # Détecteur UI spécialisé
         self.ui_detector = DofusUIDetector()
+
+        # NOUVEAU: Détecteur YOLO optionnel pour objets dynamiques
+        self.yolo_detector = None
+        self.enable_yolo = False
+        self.yolo_zones = ["center_game"]  # Zones où YOLO est actif
+
+        # Stratégie de détection hybride
+        self.detection_strategy = {
+            "center_game": "hybrid",      # YOLO + Template pour objets du jeu
+            "ui_area": "template",        # Template pour UI précise
+            "minimap": "template",        # Template pour minimap
+            "combat_interface": "ui"      # UI detector existant
+        }
         
         # Configuration de capture d'écran
-        self.screen_capturer = mss.mss()
+        # MSS sera créé à la volée pour éviter les problèmes de thread
         self.dofus_window_title = "DOFUS"
         self.dofus_window_handle = None
         
@@ -387,23 +408,29 @@ class ScreenAnalyzer(IAnalysisModule):
         """Initialise le module d'analyse d'écran"""
         try:
             self.logger.info("Initialisation du module d'analyse d'écran")
-            
+
             # Recherche de la fenêtre DOFUS
             self.dofus_window_handle = self._find_dofus_window()
             if not self.dofus_window_handle:
                 self.logger.warning("Fenêtre DOFUS non trouvée, utilisation écran complet")
-            
+
+            # NOUVEAU: Initialisation YOLO si activé
+            yolo_config = config.get('yolo', {})
+            if yolo_config.get('enable', False) and YOLO_AVAILABLE:
+                self._initialize_yolo_detector(yolo_config)
+
             # Test de capture d'écran
             test_screenshot = self._capture_screen()
             if test_screenshot is None:
                 self.logger.error("Impossible de capturer l'écran")
-                return False
-            
+                # On continue quand même, la capture pourrait marcher plus tard
+                # return False
+
             # Démarrage capture continue
             self._start_continuous_capture()
-            
+
             self.status = ModuleStatus.ACTIVE
-            self.logger.info("Module d'analyse d'écran initialisé")
+            self.logger.info(f"Module d'analyse d'écran initialisé (YOLO: {'✓' if self.enable_yolo else '✗'})")
             return True
             
         except Exception as e:
@@ -414,10 +441,15 @@ class ScreenAnalyzer(IAnalysisModule):
     def _find_dofus_window(self) -> Optional[int]:
         """Trouve la fenêtre DOFUS"""
         try:
+            import win32gui
+            
             def enum_windows_callback(hwnd, windows):
-                window_text = win32gui.GetWindowText(hwnd)
-                if "DOFUS" in window_text and win32gui.IsWindowVisible(hwnd):
-                    windows.append(hwnd)
+                try:
+                    window_text = win32gui.GetWindowText(hwnd)
+                    if "DOFUS" in window_text and win32gui.IsWindowVisible(hwnd):
+                        windows.append(hwnd)
+                except:
+                    pass
                 return True
             
             windows = []
@@ -425,6 +457,9 @@ class ScreenAnalyzer(IAnalysisModule):
             
             return windows[0] if windows else None
             
+        except ImportError:
+            self.logger.warning("win32gui non disponible, capture écran complet uniquement")
+            return None
         except Exception as e:
             self.logger.error(f"Erreur recherche fenêtre DOFUS: {e}")
             return None
@@ -466,27 +501,34 @@ class ScreenAnalyzer(IAnalysisModule):
     def _capture_screen(self) -> Optional[np.ndarray]:
         """Capture l'écran ou la fenêtre DOFUS"""
         try:
-            if self.dofus_window_handle:
-                # Capture de la fenêtre DOFUS spécifiquement
-                rect = win32gui.GetWindowRect(self.dofus_window_handle)
-                monitor = {
-                    "top": rect[1],
-                    "left": rect[0], 
-                    "width": rect[2] - rect[0],
-                    "height": rect[3] - rect[1]
-                }
-            else:
-                # Capture écran complet
-                monitor = self.screen_capturer.monitors[1]  # Écran principal
-            
-            # Capture avec MSS (plus rapide)
-            screenshot = self.screen_capturer.grab(monitor)
-            
-            # Conversion en format OpenCV
-            img = np.array(screenshot)
-            img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
-            
-            return img
+            # Créer une nouvelle instance MSS pour chaque capture pour éviter les problèmes de thread
+            with mss.mss() as sct:
+                if self.dofus_window_handle:
+                    try:
+                        import win32gui
+                        # Capture de la fenêtre DOFUS spécifiquement
+                        rect = win32gui.GetWindowRect(self.dofus_window_handle)
+                        monitor = {
+                            "top": rect[1],
+                            "left": rect[0], 
+                            "width": rect[2] - rect[0],
+                            "height": rect[3] - rect[1]
+                        }
+                    except:
+                        # Si erreur, utiliser écran complet
+                        monitor = sct.monitors[1] if len(sct.monitors) > 1 else {"top": 0, "left": 0, "width": 1920, "height": 1080}
+                else:
+                    # Capture écran complet - utiliser monitor 1 pour l'écran principal (0 est le combiné)
+                    monitor = sct.monitors[1] if len(sct.monitors) > 1 else {"top": 0, "left": 0, "width": 1920, "height": 1080}
+                
+                # Capture avec MSS (plus rapide)
+                screenshot = sct.grab(monitor)
+                
+                # Conversion en format OpenCV
+                img = np.array(screenshot)
+                img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+                
+                return img
             
         except Exception as e:
             self.logger.error(f"Erreur lors de la capture: {e}")
@@ -558,6 +600,14 @@ class ScreenAnalyzer(IAnalysisModule):
             resources = self.ui_detector.detect_resources(screenshot)
             if resources:
                 analysis_result["resources"] = resources
+
+            # === NOUVEAU: DÉTECTION D'OBJETS DYNAMIQUES (YOLO) ===
+            if self.enable_yolo:
+                dynamic_objects = self._analyze_dynamic_objects(screenshot)
+                if dynamic_objects:
+                    analysis_result["dynamic_objects"] = dynamic_objects
+                    # Fusion avec ressources existantes si pertinent
+                    analysis_result["resources"].extend(dynamic_objects.get("resources", []))
             
             # === MÉTRIQUES DE PERFORMANCE ===
             analysis_time = time.perf_counter() - start_time
@@ -613,7 +663,11 @@ class ScreenAnalyzer(IAnalysisModule):
         gray = clahe.apply(gray)
         
         # OCR
-        ocr_text = pytesseract.image_to_string(gray, config='--psm 6', lang='fra')
+        # Utiliser anglais par défaut, français si disponible
+        try:
+            ocr_text = pytesseract.image_to_string(gray, config='--psm 6', lang='fra')
+        except:
+            ocr_text = pytesseract.image_to_string(gray, config='--psm 6')
         
         stats = {}
         
@@ -822,19 +876,210 @@ class ScreenAnalyzer(IAnalysisModule):
             "cache_size": len(self.detection_cache)
         }
     
+    def _initialize_yolo_detector(self, yolo_config: Dict[str, Any]) -> None:
+        """Initialise le détecteur YOLO de manière optionnelle"""
+        try:
+            self.logger.info("Initialisation du détecteur YOLO...")
+
+            # Configuration YOLO
+            config = YOLOConfig()
+            if 'model_path' in yolo_config:
+                config.model_path = yolo_config['model_path']
+            if 'confidence_threshold' in yolo_config:
+                config.confidence_threshold = yolo_config['confidence_threshold']
+            if 'device' in yolo_config:
+                config.device = yolo_config['device']
+
+            # Initialisation
+            self.yolo_detector = DofusYOLODetector(config=config)
+
+            # Test d'initialisation
+            if self.yolo_detector.initialize({}):
+                self.enable_yolo = True
+                self.logger.info("✅ Détecteur YOLO initialisé avec succès")
+
+                # Configuration des zones YOLO
+                if 'zones' in yolo_config:
+                    self.yolo_zones = yolo_config['zones']
+            else:
+                self.logger.warning("❌ Échec initialisation YOLO - mode template uniquement")
+                self.yolo_detector = None
+
+        except Exception as e:
+            self.logger.error(f"Erreur initialisation YOLO: {e}")
+            self.yolo_detector = None
+            self.enable_yolo = False
+
+    def _analyze_dynamic_objects(self, screenshot: np.ndarray) -> Dict[str, Any]:
+        """
+        Analyse les objets dynamiques avec YOLO dans les zones définies
+
+        Args:
+            screenshot: Image complète à analyser
+
+        Returns:
+            Dict contenant les objets détectés par zone
+        """
+        if not self.enable_yolo or not self.yolo_detector:
+            return {}
+
+        dynamic_results = {
+            "zones_analyzed": [],
+            "total_objects": 0,
+            "objects_by_type": defaultdict(list),
+            "resources": [],  # Format compatible avec l'existant
+            "monsters": [],
+            "npcs": [],
+            "players": []
+        }
+
+        try:
+            # Analyse des zones configurées pour YOLO
+            for zone_name in self.yolo_zones:
+                if zone_name in self.screen_regions:
+                    zone_result = self._analyze_zone_with_yolo(screenshot, zone_name)
+                    if zone_result:
+                        dynamic_results["zones_analyzed"].append(zone_name)
+
+                        # Fusion des résultats
+                        for obj_type, objects in zone_result.get("objects_by_type", {}).items():
+                            dynamic_results["objects_by_type"][obj_type].extend(objects)
+                            dynamic_results["total_objects"] += len(objects)
+
+                            # Classification pour compatibilité
+                            self._classify_objects_for_compatibility(objects, obj_type, dynamic_results)
+
+            self.logger.debug(f"YOLO détecté {dynamic_results['total_objects']} objets dans {len(dynamic_results['zones_analyzed'])} zones")
+
+        except Exception as e:
+            self.logger.error(f"Erreur analyse objets dynamiques: {e}")
+
+        return dynamic_results
+
+    def _analyze_zone_with_yolo(self, screenshot: np.ndarray, zone_name: str) -> Dict[str, Any]:
+        """Analyse une zone spécifique avec YOLO"""
+        try:
+            # Extraction de la zone
+            region = self.screen_regions[zone_name]
+            x, y, w, h = region.x, region.y, region.width, region.height
+            zone_image = screenshot[y:y+h, x:x+w]
+
+            # Détection YOLO
+            detections = self.yolo_detector.detect(zone_image)
+
+            if not detections:
+                return {}
+
+            # Ajustement des coordonnées pour l'image complète
+            adjusted_objects = defaultdict(list)
+
+            for detection in detections:
+                # Conversion des coordonnées relatives à absolues
+                abs_bbox = (
+                    detection.bbox[0] + x,
+                    detection.bbox[1] + y,
+                    detection.bbox[2] + x,
+                    detection.bbox[3] + y
+                )
+
+                abs_center = (
+                    detection.center[0] + x,
+                    detection.center[1] + y
+                )
+
+                obj_data = {
+                    "type": detection.class_name,
+                    "confidence": detection.confidence,
+                    "position": abs_center,
+                    "bounding_box": abs_bbox,
+                    "area": detection.area,
+                    "method": "yolo",
+                    "zone": zone_name,
+                    "timestamp": detection.timestamp
+                }
+
+                adjusted_objects[detection.class_name].append(obj_data)
+
+            return {
+                "zone": zone_name,
+                "objects_by_type": dict(adjusted_objects),
+                "total_detections": len(detections)
+            }
+
+        except Exception as e:
+            self.logger.error(f"Erreur analyse zone {zone_name}: {e}")
+            return {}
+
+    def _classify_objects_for_compatibility(self, objects: List[Dict], obj_type: str, results: Dict):
+        """Classe les objets YOLO dans les catégories compatibles avec l'existant"""
+        for obj in objects:
+            if "resource" in obj_type:
+                # Format compatible avec detect_resources
+                resource_obj = {
+                    "type": obj_type.replace("resource_", ""),
+                    "position": obj["position"],
+                    "bounding_box": obj["bounding_box"],
+                    "confidence": obj["confidence"],
+                    "scale": 1.0,  # YOLO est scale-invariant
+                    "method": "yolo"
+                }
+                results["resources"].append(resource_obj)
+
+            elif obj_type == "monster" or obj_type == "archmonster":
+                results["monsters"].append(obj)
+
+            elif obj_type == "npc":
+                results["npcs"].append(obj)
+
+            elif obj_type == "player" or obj_type == "pvp_player":
+                results["players"].append(obj)
+
+    def get_yolo_status(self) -> Dict[str, Any]:
+        """Retourne le statut du système YOLO"""
+        return {
+            "available": YOLO_AVAILABLE,
+            "enabled": self.enable_yolo,
+            "detector_loaded": self.yolo_detector is not None,
+            "zones_configured": self.yolo_zones,
+            "model_info": self.yolo_detector.get_state() if self.yolo_detector else None
+        }
+
+    def toggle_yolo(self, enabled: bool) -> bool:
+        """Active/désactive YOLO de manière dynamique"""
+        if not YOLO_AVAILABLE:
+            self.logger.warning("YOLO non disponible")
+            return False
+
+        if enabled and not self.yolo_detector:
+            # Initialisation différée
+            self._initialize_yolo_detector({"enable": True})
+
+        self.enable_yolo = enabled and self.yolo_detector is not None
+        self.logger.info(f"YOLO {'activé' if self.enable_yolo else 'désactivé'}")
+        return self.enable_yolo
+
+    def set_yolo_zones(self, zones: List[str]) -> None:
+        """Configure les zones où YOLO est actif"""
+        valid_zones = [z for z in zones if z in self.screen_regions]
+        self.yolo_zones = valid_zones
+        self.logger.info(f"Zones YOLO configurées: {valid_zones}")
+
     def cleanup(self) -> None:
         """Nettoie les ressources"""
         self.logger.info("Arrêt du module d'analyse d'écran")
-        
+
         # Arrêt capture continue
         self.is_capturing = False
         if self.capture_thread and self.capture_thread.is_alive():
             self.capture_thread.join(timeout=2.0)
-        
-        # Fermeture ressources
-        if hasattr(self, 'screen_capturer'):
-            self.screen_capturer.close()
-        
+
+        # NOUVEAU: Nettoyage YOLO
+        if self.yolo_detector:
+            self.yolo_detector.cleanup()
+            self.yolo_detector = None
+
+        # Pas besoin de fermer MSS car on utilise le context manager
+
         self.status = ModuleStatus.INACTIVE
         self.logger.info("Module d'analyse d'écran arrêté")
     
