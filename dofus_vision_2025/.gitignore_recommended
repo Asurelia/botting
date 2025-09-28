@@ -1,0 +1,372 @@
+# 🚫 GITIGNORE RECOMMANDÉ - DOFUS VISION 2025
+# Créé par Claude Code Refactoring Specialist
+# Date: 28 septembre 2025
+
+# ========================================
+# 🐍 PYTHON
+# ========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ========================================
+# 🎮 DOFUS VISION SPÉCIFIQUE
+# ========================================
+
+# Fichiers temporaires de test
+temp/
+temporary/
+*_temp.json
+*_test_report.json
+system_test_report.json
+test_integration_summary.json
+test_knowledge_summary.json
+
+# Captures d'écran temporaires
+screenshots/
+captures/
+*.png
+*.jpg
+*.jpeg
+!docs/images/*.png
+!docs/images/*.jpg
+
+# Bases de données de cache
+*cache*.db
+*cache*.sqlite
+extraction_cache.db
+
+# Logs système
+*.log
+logs/
+debug.log
+error.log
+game.log
+
+# Configuration locale
+config_local.json
+settings_local.json
+user_preferences.json
+
+# Données utilisateur sensibles
+player_data/
+session_data/
+personal_stats/
+
+# Sauvegardes automatiques
+backup/
+backups/
+*.bak
+*.backup
+
+# Modèles ML/AI entraînés
+models/
+trained_models/
+*.pkl
+*.h5
+*.pt
+*.pth
+
+# Données d'apprentissage personnalisées
+user_learning_data/
+personal_patterns/
+
+# ========================================
+# 🖥️ SYSTÈME / IDE
+# ========================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# ========================================
+# 🔧 OUTILS DE DÉVELOPPEMENT
+# ========================================
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Benchmarks
+benchmark_results/
+performance_tests/
+
+# Profiling
+*.prof
+*.profile
+
+# Documentation générée
+docs/build/
+docs/_build/
+
+# ========================================
+# 🚫 SÉCURITÉ
+# ========================================
+
+# Clés API et secrets
+*.key
+*.pem
+*.p12
+secrets/
+credentials/
+api_keys.json
+
+# Configurations sensibles
+production_config.json
+database_credentials.json
+
+# ========================================
+# 📦 DÉPENDANCES / LIBS
+# ========================================
+
+# Node modules (si applicable)
+node_modules/
+
+# Autres gestionnaires de packages
+vendor/
+
+# ========================================
+# 🎯 PERFORMANCE
+# ========================================
+
+# Gros fichiers de données
+*.dat
+large_datasets/
+bulk_data/
+
+# Fichiers binaires volumineux
+*.bin
+*.exe
+*.msi
+
+# ========================================
+# 📱 INTERFACES UTILISATEUR
+# ========================================
+
+# Tkinter
+*.tcl
+
+# Qt
+*.ui
+
+# Configuration d'interface
+ui_state.json
+window_positions.json
+
+# ========================================
+# 🔄 INTÉGRATION CONTINUE
+# ========================================
+
+# GitHub Actions
+.github/workflows/local_*
+
+# Build artifacts
+build/
+dist/
+
+# Test artifacts
+test_output/
+test_results/
+
+# ========================================
+# 🎮 JEUX / GAMING
+# ========================================
+
+# Fichiers de jeu temporaires
+game_state_*.json
+player_session_*.dat
+
+# Anti-cheat / détection
+detection_logs/
+anti_detection/
+
+# Captures de jeu
+game_captures/
+game_videos/
+
+# ========================================
+# 📊 DONNÉES / ANALYTICS
+# ========================================
+
+# Métriques temporaires
+metrics_*.json
+analytics_*.csv
+
+# Rapports générés
+reports/generated/
+auto_reports/
+
+# Exports de données
+exports/
+data_dumps/
+
+# ========================================
+# 🧪 TESTS
+# ========================================
+
+# Données de test générées
+test_data/generated/
+mock_data/
+
+# Résultats de tests
+test_results/
+.pytest_cache/
+
+# ========================================
+# NOTES:
+# - Copiez ce fichier vers .gitignore
+# - Adaptez selon vos besoins spécifiques
+# - Certaines exclusions peuvent être trop strictes
+# - Vérifiez avant de commiter des fichiers importants
+# ========================================
