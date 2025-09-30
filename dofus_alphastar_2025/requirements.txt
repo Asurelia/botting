@@ -1,0 +1,69 @@
+# DOFUS AlphaStar 2025 - Requirements
+# Core ML/RL
+torch>=2.0.0
+torch-directml>=0.2.0  # AMD DirectML support
+torchvision>=0.15.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Reinforcement Learning
+ray[rllib]>=2.8.0
+stable-baselines3>=2.2.0
+gymnasium>=0.29.0
+tianshou>=1.0.0  # Alternative RL framework
+
+# Vision & OCR
+opencv-python>=4.8.0
+pillow>=10.0.0
+ultralytics>=8.0.0  # SAM 2 integration
+transformers>=4.35.0  # TrOCR
+datasets>=2.14.0
+
+# Data Processing
+pandas>=2.1.0
+sqlalchemy>=2.0.0
+sqlite3  # Built-in
+h5py>=3.9.0
+zarr>=2.16.0  # Efficient data storage
+
+# Web & APIs
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+aiohttp>=3.9.0
+websockets>=11.0
+
+# Monitoring & Logging
+wandb>=0.15.0  # ML experiment tracking
+tensorboard>=2.14.0
+mlflow>=2.8.0
+rich>=13.6.0  # Beautiful terminal output
+loguru>=0.7.2
+
+# GUI & Visualization
+tkinter  # Built-in
+matplotlib>=3.8.0
+plotly>=5.17.0
+dash>=2.14.0  # Web dashboard
+
+# System & Performance
+psutil>=5.9.0
+pyautogui>=0.9.54
+pynput>=1.7.6
+win32gui  # Windows-specific
+pywin32  # Windows API
+
+# Development & Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.9.0
+flake8>=6.1.0
+mypy>=1.6.0
+
+# Optional: AMD ROCm (manual installation)
+# rocm-runtime
+# rocrand
+# rocblas
+
+# Optional: High-performance computing
+numba>=0.58.0
+cupy-rocm-5-0>=12.0.0  # AMD GPU acceleration (if available)
