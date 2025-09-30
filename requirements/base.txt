@@ -1,5 +1,8 @@
 # IA DOFUS - Base Requirements
-# Optimisé pour AMD 7800XT + Windows 11
+# Optimis pour AMD 7800XT + Windows 11
+
+# Database ORM
+sqlalchemy>=2.0.0
 
 # Computer Vision & Deep Learning
 ultralytics>=8.0.0

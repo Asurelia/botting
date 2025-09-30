@@ -6,14 +6,6 @@
 
 # Core dependencies
 pyyaml>=6.0.1              # Configuration YAML
-sqlite3                    # Base de données (built-in Python)
-pathlib                    # Gestion des chemins (built-in Python)
-logging                    # Logging (built-in Python)
-json                       # JSON (built-in Python)
-hashlib                    # Hash (built-in Python)
-shutil                     # Utilitaires fichiers (built-in Python)
-datetime                   # Date/time (built-in Python)
-typing                     # Type hints (built-in Python)
 
 # Vision and Screen Capture
 opencv-python>=4.8.0       # Computer vision et template matching
@@ -36,28 +28,6 @@ urllib3>=2.0.0             # Utilitaires HTTP bas niveau
 
 # Data Processing
 pandas>=2.0.0              # Analyse de données (pour market analyzer)
-scipy>=1.11.0              # Calculs scientifiques
-scikit-learn>=1.3.0        # Machine learning (pour l'IA de combat)
-
-# Threading and Async
-asyncio                    # Programmation asynchrone (built-in Python)
-threading                  # Threading (built-in Python)
-concurrent.futures         # Futures (built-in Python)
-queue                      # Queues thread-safe (built-in Python)
-
-# System and OS
-psutil>=5.9.0              # Informations système
-watchdog>=3.0.0            # Surveillance fichiers
-schedule>=1.2.0            # Planificateur de tâches
-
-# Crypto and Security
-cryptography>=41.0.0       # Chiffrement des données sensibles
-bcrypt>=4.0.0              # Hash de mots de passe
-
-# Configuration and Environment
-python-dotenv>=1.0.0       # Variables d'environnement (.env)
-configparser               # Configuration ini (built-in Python)
-argparse                   # Arguments ligne de commande (built-in Python)
 
 # Logging and Monitoring
 colorlog>=6.7.0            # Logs colorés

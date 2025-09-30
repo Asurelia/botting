@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "environment": "development",
+  "gpu": {
+    "enable_amd": true,
+    "memory_fraction": 0.8,
+    "mixed_precision": true
+  },
+  "vision": {
+    "capture_fps": 60,
+    "ocr_language": "fra+eng",
+    "detection_threshold": 0.7
+  },
+  "ai": {
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "max_memory_mb": 4096
+  }
+}
