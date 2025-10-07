@@ -13,6 +13,7 @@ from typing import Optional, Tuple
 from dataclasses import dataclass
 import logging
 import time
+import threading
 
 from core.platform_adapter import PlatformAdapter, WindowInfo
 
@@ -47,19 +48,33 @@ class VisionCaptureAdapter:
     def __init__(self):
         self.platform_adapter = PlatformAdapter()
         self.game_window: Optional[WindowInfo] = None
-        self.sct = mss.mss()
-        
+
+        # Thread-local mss instance (fix threading bug)
+        self._local = threading.local()
+
         # Stats
         self.frames_captured = 0
         self.capture_times = []
         self.errors = 0
-        
+
         # Cache
         self.last_capture_time = 0
         self.cache_duration = 0.016  # 16ms (~60 FPS max)
         self.cached_frame = None
-        
+
         logger.info(f"VisionCaptureAdapter initialized - OS: {self.platform_adapter.get_system()}")
+
+    def _get_sct(self):
+        """
+        Get thread-local mss instance
+
+        Creates a new mss.mss() instance per thread to avoid
+        threading issues with X11 display connection.
+        """
+        if not hasattr(self._local, 'sct'):
+            self._local.sct = mss.mss()
+            logger.debug(f"Created mss instance for thread {threading.current_thread().name}")
+        return self._local.sct
 
     def find_game_window(self, title_pattern: str = "Dofus") -> bool:
         """
@@ -110,10 +125,12 @@ class VisionCaptureAdapter:
                 }
             else:
                 # Capture écran complet
-                region = self.sct.monitors[1]  # Primary monitor
-            
-            # Capture avec mss
-            screenshot = self.sct.grab(region)
+                sct = self._get_sct()
+                region = sct.monitors[1]  # Primary monitor
+
+            # Capture avec mss (thread-safe)
+            sct = self._get_sct()
+            screenshot = sct.grab(region)
             
             # Convert to numpy array (BGR for OpenCV)
             img = np.array(screenshot)
@@ -144,11 +161,11 @@ class VisionCaptureAdapter:
     def capture_region(self, x: int, y: int, width: int, height: int) -> Optional[np.ndarray]:
         """
         Capture région spécifique de l'écran
-        
+
         Args:
             x, y: Position coin supérieur gauche
             width, height: Dimensions
-            
+
         Returns:
             Image numpy array ou None
         """
@@ -159,8 +176,10 @@ class VisionCaptureAdapter:
                 "width": width,
                 "height": height
             }
-            
-            screenshot = self.sct.grab(region)
+
+            # Thread-safe mss instance
+            sct = self._get_sct()
+            screenshot = sct.grab(region)
             img = np.array(screenshot)
             
             if img.shape[2] == 4:
