@@ -1,0 +1,244 @@
+{
+  "world_id": "astrub",
+  "world_name": "Astrub et ses environs",
+  "description": "Zone de démarrage niveau 1-50",
+  "level_range": [1, 50],
+  "regions": [
+    {
+      "region_id": "astrub_city",
+      "name": "Cité d'Astrub",
+      "type": "city",
+      "level_range": [1, 200],
+      "maps": [
+        {
+          "map_id": "astrub_center",
+          "coordinates": [0, 0],
+          "name": "Centre d'Astrub",
+          "elements": [
+            {"type": "zaap", "position": [400, 300], "name": "Zaap d'Astrub"},
+            {"type": "npc", "name": "Otomaï", "position": [350, 280], "quest_giver": true},
+            {"type": "bank", "position": [450, 320]},
+            {"type": "hdv", "position": [380, 350], "categories": ["all"]}
+          ]
+        }
+      ]
+    },
+    {
+      "region_id": "astrub_plains",
+      "name": "Plaines d'Astrub",
+      "type": "farming_zone",
+      "level_range": [1, 20],
+      "maps": [
+        {
+          "map_id": "plains_001",
+          "coordinates": [1, 0],
+          "name": "Plaines - Est",
+          "monsters": [
+            {
+              "monster_type": "Tofu",
+              "level_range": [1, 5],
+              "spawn_rate": "high",
+              "group_size": [1, 3],
+              "positions": [[200, 150], [350, 200], [500, 180]]
+            },
+            {
+              "monster_type": "Bouftou",
+              "level_range": [5, 10],
+              "spawn_rate": "medium",
+              "group_size": [1, 2],
+              "positions": [[400, 250], [550, 300]]
+            }
+          ],
+          "resources": [
+            {
+              "resource_type": "Blé",
+              "profession": "Paysan",
+              "level_required": 1,
+              "positions": [[150, 100], [300, 120], [450, 110]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "region_id": "astrub_forest",
+      "name": "Forêt d'Astrub",
+      "type": "farming_zone",
+      "level_range": [10, 30],
+      "maps": [
+        {
+          "map_id": "forest_west",
+          "coordinates": [-2, 0],
+          "name": "Forêt - Ouest",
+          "monsters": [
+            {
+              "monster_type": "Moskito",
+              "level_range": [10, 15],
+              "spawn_rate": "high",
+              "group_size": [2, 4],
+              "positions": [[250, 200], [400, 220], [550, 190]]
+            },
+            {
+              "monster_type": "Arakne",
+              "level_range": [15, 20],
+              "spawn_rate": "medium",
+              "group_size": [1, 3],
+              "positions": [[300, 280], [480, 300]]
+            }
+          ],
+          "resources": [
+            {
+              "resource_type": "Frêne",
+              "profession": "Bûcheron",
+              "level_required": 10,
+              "positions": [[180, 150], [320, 180], [460, 160], [590, 200]]
+            },
+            {
+              "resource_type": "Ortie",
+              "profession": "Alchimiste",
+              "level_required": 10,
+              "positions": [[200, 250], [350, 270]]
+            }
+          ]
+        },
+        {
+          "map_id": "forest_center",
+          "coordinates": [-1, 0],
+          "name": "Forêt - Centre",
+          "monsters": [
+            {
+              "monster_type": "Sanglier",
+              "level_range": [15, 25],
+              "spawn_rate": "medium",
+              "group_size": [1, 2],
+              "positions": [[350, 250], [500, 280]]
+            }
+          ],
+          "resources": [
+            {
+              "resource_type": "Frêne",
+              "profession": "Bûcheron",
+              "level_required": 10,
+              "positions": [[220, 200], [380, 220], [520, 210]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "region_id": "astrub_cemetery",
+      "name": "Cimetière d'Astrub",
+      "type": "farming_zone",
+      "level_range": [15, 35],
+      "maps": [
+        {
+          "map_id": "cemetery_entrance",
+          "coordinates": [0, 2],
+          "name": "Entrée du Cimetière",
+          "monsters": [
+            {
+              "monster_type": "Pious",
+              "level_range": [20, 30],
+              "spawn_rate": "high",
+              "group_size": [2, 4],
+              "positions": [[300, 200], [450, 220], [550, 250]]
+            },
+            {
+              "monster_type": "Chafer",
+              "level_range": [25, 35],
+              "spawn_rate": "medium",
+              "group_size": [1, 3],
+              "positions": [[380, 280], [520, 300]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "region_id": "astrub_underground",
+      "name": "Souterrains d'Astrub",
+      "type": "dungeon",
+      "level_range": [30, 50],
+      "maps": [
+        {
+          "map_id": "underground_001",
+          "coordinates": [0, 0],
+          "name": "Souterrains - Niveau 1",
+          "is_interior": true,
+          "monsters": [
+            {
+              "monster_type": "Larve des Égouts",
+              "level_range": [30, 40],
+              "spawn_rate": "very_high",
+              "group_size": [3, 6],
+              "positions": [[250, 200], [380, 230], [500, 210], [600, 250]]
+            }
+          ],
+          "resources": [
+            {
+              "resource_type": "Fer",
+              "profession": "Mineur",
+              "level_required": 20,
+              "positions": [[200, 180], [400, 200]]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from_map": "astrub_center",
+      "to_map": "plains_001",
+      "direction": "east",
+      "travel_time": 10
+    },
+    {
+      "from_map": "astrub_center",
+      "to_map": "forest_center",
+      "direction": "west",
+      "travel_time": 15
+    },
+    {
+      "from_map": "forest_center",
+      "to_map": "forest_west",
+      "direction": "west",
+      "travel_time": 10
+    },
+    {
+      "from_map": "astrub_center",
+      "to_map": "cemetery_entrance",
+      "direction": "north",
+      "travel_time": 20
+    }
+  ],
+  "zaaps": [
+    {
+      "zaap_id": "zaap_astrub",
+      "name": "Zaap d'Astrub",
+      "map_id": "astrub_center",
+      "position": [400, 300],
+      "cost": 0
+    }
+  ],
+  "farming_routes": [
+    {
+      "route_id": "tofu_route",
+      "name": "Circuit Tofu (Niveau 1-10)",
+      "level_range": [1, 10],
+      "estimated_time": 900,
+      "estimated_xp": 500,
+      "estimated_kamas": 1000,
+      "waypoints": ["plains_001"]
+    },
+    {
+      "route_id": "forest_route",
+      "name": "Circuit Forêt (Niveau 15-25)",
+      "level_range": [15, 25],
+      "estimated_time": 1800,
+      "estimated_xp": 2000,
+      "estimated_kamas": 5000,
+      "waypoints": ["forest_west", "forest_center"]
+    }
+  ]
+}

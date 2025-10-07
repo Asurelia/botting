@@ -63,7 +63,7 @@ class BotConfig:
 class ConfigSection:
     """Section de configuration réutilisable"""
 
-    def __init__(self, parent, theme_manager: ThemeManager, title: str, icon: str = "⚙️"):
+    def __init__(self, parent, theme_manager: ThemeManager, title: str, icon: str = "[SETTINGS]"):
         self.parent = parent
         self.theme = theme_manager
         self.title = title
@@ -120,7 +120,7 @@ class ControlPanel:
 
         title_label = self.theme.create_title_label(
             header_frame,
-            text="🎮 Contrôle et Configuration"
+            text="[GAME] Contrôle et Configuration"
         )
         title_label.pack(side=tk.LEFT)
 
@@ -148,7 +148,7 @@ class ControlPanel:
         # Bouton Start/Stop
         self.start_stop_btn = self.theme.create_primary_button(
             actions_frame,
-            text="▶️ DÉMARRER",
+            text=">️ DÉMARRER",
             command=self.toggle_bot
         )
         self.start_stop_btn.pack(side=tk.LEFT, padx=(0, 10))
@@ -156,7 +156,7 @@ class ControlPanel:
         # Bouton Pause/Resume
         self.pause_btn = self.theme.create_secondary_button(
             actions_frame,
-            text="⏸️ PAUSE",
+            text="||️ PAUSE",
             command=self.toggle_pause,
             state="disabled"
         )
@@ -165,7 +165,7 @@ class ControlPanel:
         # Bouton Emergency Stop
         emergency_btn = self.theme.create_secondary_button(
             actions_frame,
-            text="🛑 ARRÊT D'URGENCE",
+            text=" ARRÊT D'URGENCE",
             command=self.emergency_stop
         )
         emergency_btn.configure(bg=self.theme.get_colors().accent_error)
@@ -173,8 +173,8 @@ class ControlPanel:
 
     def create_basic_controls(self):
         """Section contrôles de base"""
-        section = ConfigSection(self.notebook, self.theme, "Contrôles de Base", "🎯")
-        self.notebook.add(section.frame, text="🎯 Contrôles")
+        section = ConfigSection(self.notebook, self.theme, "Contrôles de Base", "[TARGET]")
+        self.notebook.add(section.frame, text="[TARGET] Contrôles")
 
         # Auto-démarrage
         auto_start_var = tk.BooleanVar(value=self.config.auto_start)
@@ -229,8 +229,8 @@ class ControlPanel:
 
     def create_quest_config(self):
         """Section configuration des quêtes"""
-        section = ConfigSection(self.notebook, self.theme, "Configuration des Quêtes", "📋")
-        self.notebook.add(section.frame, text="📋 Quêtes")
+        section = ConfigSection(self.notebook, self.theme, "Configuration des Quêtes", "")
+        self.notebook.add(section.frame, text=" Quêtes")
 
         # Mode de quête
         mode_frame = self.theme.create_frame(section.content_frame, "primary")
@@ -310,29 +310,29 @@ class ControlPanel:
 
         add_quest_btn = self.theme.create_secondary_button(
             quest_buttons_frame,
-            text="➕ Ajouter",
+            text=" Ajouter",
             command=self.add_quest
         )
         add_quest_btn.pack(side=tk.LEFT, padx=(0, 5))
 
         remove_quest_btn = self.theme.create_secondary_button(
             quest_buttons_frame,
-            text="➖ Supprimer",
+            text=" Supprimer",
             command=self.remove_quest
         )
         remove_quest_btn.pack(side=tk.LEFT, padx=(0, 5))
 
         load_quest_btn = self.theme.create_secondary_button(
             quest_buttons_frame,
-            text="📁 Charger liste",
+            text=" Charger liste",
             command=self.load_quest_list
         )
         load_quest_btn.pack(side=tk.LEFT)
 
     def create_navigation_config(self):
         """Section configuration navigation"""
-        section = ConfigSection(self.notebook, self.theme, "Configuration Navigation", "🗺️")
-        self.notebook.add(section.frame, text="🗺️ Navigation")
+        section = ConfigSection(self.notebook, self.theme, "Configuration Navigation", "[MAP]")
+        self.notebook.add(section.frame, text="[MAP] Navigation")
 
         # Vitesse de déplacement
         speed_frame = self.theme.create_frame(section.content_frame, "primary")
@@ -407,8 +407,8 @@ class ControlPanel:
 
     def create_combat_config(self):
         """Section configuration combat"""
-        section = ConfigSection(self.notebook, self.theme, "Configuration Combat", "⚔️")
-        self.notebook.add(section.frame, text="⚔️ Combat")
+        section = ConfigSection(self.notebook, self.theme, "Configuration Combat", "[COMBAT]")
+        self.notebook.add(section.frame, text="[COMBAT] Combat")
 
         # Mode de combat
         combat_mode_frame = self.theme.create_frame(section.content_frame, "primary")
@@ -486,8 +486,8 @@ class ControlPanel:
 
     def create_ai_config(self):
         """Section configuration IA"""
-        section = ConfigSection(self.notebook, self.theme, "Configuration IA", "🧠")
-        self.notebook.add(section.frame, text="🧠 IA")
+        section = ConfigSection(self.notebook, self.theme, "Configuration IA", "")
+        self.notebook.add(section.frame, text=" IA")
 
         # Modèle d'IA
         ai_model_frame = self.theme.create_frame(section.content_frame, "primary")
@@ -575,8 +575,8 @@ class ControlPanel:
 
     def create_performance_config(self):
         """Section configuration performance"""
-        section = ConfigSection(self.notebook, self.theme, "Configuration Performance", "⚡")
-        self.notebook.add(section.frame, text="⚡ Performance")
+        section = ConfigSection(self.notebook, self.theme, "Configuration Performance", "")
+        self.notebook.add(section.frame, text=" Performance")
 
         # Limite FPS
         fps_frame = self.theme.create_frame(section.content_frame, "primary")
@@ -668,8 +668,8 @@ class ControlPanel:
 
     def create_security_config(self):
         """Section configuration sécurité"""
-        section = ConfigSection(self.notebook, self.theme, "Configuration Sécurité", "🔒")
-        self.notebook.add(section.frame, text="🔒 Sécurité")
+        section = ConfigSection(self.notebook, self.theme, "Configuration Sécurité", "")
+        self.notebook.add(section.frame, text=" Sécurité")
 
         # Intervalle screenshots
         screenshot_frame = self.theme.create_frame(section.content_frame, "primary")
@@ -738,21 +738,21 @@ class ControlPanel:
 
         save_config_btn = self.theme.create_primary_button(
             files_frame,
-            text="💾 Sauvegarder Config",
+            text="[SAVE] Sauvegarder Config",
             command=self.save_config
         )
         save_config_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         load_config_btn = self.theme.create_secondary_button(
             files_frame,
-            text="📁 Charger Config",
+            text=" Charger Config",
             command=self.load_config_file
         )
         load_config_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         reset_config_btn = self.theme.create_secondary_button(
             files_frame,
-            text="🔄 Reset Config",
+            text="[RELOAD] Reset Config",
             command=self.reset_config
         )
         reset_config_btn.pack(side=tk.LEFT)
@@ -763,11 +763,11 @@ class ControlPanel:
             if self.app_controller and hasattr(self.app_controller, 'is_running'):
                 if self.app_controller.is_running:
                     self.app_controller.stop()
-                    self.start_stop_btn.configure(text="▶️ DÉMARRER")
+                    self.start_stop_btn.configure(text=">️ DÉMARRER")
                     self.pause_btn.configure(state="disabled")
                 else:
                     self.app_controller.start()
-                    self.start_stop_btn.configure(text="⏹️ ARRÊTER")
+                    self.start_stop_btn.configure(text="[]️ ARRÊTER")
                     self.pause_btn.configure(state="normal")
             else:
                 messagebox.showwarning("Attention", "Contrôleur d'application non disponible")
@@ -780,10 +780,10 @@ class ControlPanel:
             if self.app_controller and hasattr(self.app_controller, 'is_paused'):
                 if self.app_controller.is_paused:
                     self.app_controller.resume()
-                    self.pause_btn.configure(text="⏸️ PAUSE")
+                    self.pause_btn.configure(text="||️ PAUSE")
                 else:
                     self.app_controller.pause()
-                    self.pause_btn.configure(text="▶️ REPRENDRE")
+                    self.pause_btn.configure(text=">️ REPRENDRE")
         except Exception as e:
             messagebox.showerror("Erreur", f"Erreur lors de la pause: {e}")
 
@@ -793,7 +793,7 @@ class ControlPanel:
             if messagebox.askyesno("Arrêt d'urgence", "Confirmer l'arrêt d'urgence du bot?"):
                 if self.app_controller and hasattr(self.app_controller, 'emergency_stop'):
                     self.app_controller.emergency_stop()
-                self.start_stop_btn.configure(text="▶️ DÉMARRER")
+                self.start_stop_btn.configure(text=">️ DÉMARRER")
                 self.pause_btn.configure(state="disabled")
                 messagebox.showinfo("Arrêt d'urgence", "Bot arrêté d'urgence")
         except Exception as e:

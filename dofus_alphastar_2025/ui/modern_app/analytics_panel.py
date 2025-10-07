@@ -97,7 +97,7 @@ class AdvancedChart:
 
         export_btn = self.theme.create_secondary_button(
             controls_frame,
-            text="📊",
+            text="[STATS]",
             command=self.export_data
         )
         export_btn.configure(width=3)
@@ -519,7 +519,7 @@ class AnalyticsPanel:
 
         title_label = self.theme.create_title_label(
             header_frame,
-            text="📊 Analytics et Rapports"
+            text="[STATS] Analytics et Rapports"
         )
         title_label.pack(side=tk.LEFT)
 
@@ -529,14 +529,14 @@ class AnalyticsPanel:
 
         refresh_btn = self.theme.create_secondary_button(
             controls_frame,
-            text="🔄 Actualiser",
+            text="[RELOAD] Actualiser",
             command=self.refresh_analytics
         )
         refresh_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         report_btn = self.theme.create_primary_button(
             controls_frame,
-            text="📋 Rapport",
+            text=" Rapport",
             command=self.generate_report
         )
         report_btn.pack(side=tk.LEFT)
@@ -554,7 +554,7 @@ class AnalyticsPanel:
     def create_performance_section(self):
         """Section performance temps réel"""
         perf_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(perf_frame, text="⚡ Performance")
+        self.notebook.add(perf_frame, text=" Performance")
 
         # Grid des graphiques de performance
         charts_frame = self.theme.create_frame(perf_frame, "primary")
@@ -613,7 +613,7 @@ class AnalyticsPanel:
     def create_progression_section(self):
         """Section progression du personnage"""
         prog_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(prog_frame, text="📈 Progression")
+        self.notebook.add(prog_frame, text="[CHART] Progression")
 
         # Graphique de progression multi-séries
         self.progression_chart = AdvancedChart(
@@ -639,7 +639,7 @@ class AnalyticsPanel:
         self.progression_stats = StatisticsWidget(
             stats_frame,
             self.theme,
-            "📊 Statistiques de Progression"
+            "[STATS] Statistiques de Progression"
         )
         self.progression_stats.frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
 
@@ -657,7 +657,7 @@ class AnalyticsPanel:
         objectives_widget = StatisticsWidget(
             stats_frame,
             self.theme,
-            "🎯 Objectifs"
+            "[TARGET] Objectifs"
         )
         objectives_widget.frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
@@ -669,7 +669,7 @@ class AnalyticsPanel:
     def create_efficiency_section(self):
         """Section analyse d'efficacité"""
         eff_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(eff_frame, text="🎯 Efficacité")
+        self.notebook.add(eff_frame, text="[TARGET] Efficacité")
 
         # Container principal
         main_container = self.theme.create_frame(eff_frame, "primary")
@@ -702,7 +702,7 @@ class AnalyticsPanel:
         efficiency_stats = StatisticsWidget(
             analysis_frame,
             self.theme,
-            "📊 Métriques d'Efficacité"
+            "[STATS] Métriques d'Efficacité"
         )
         efficiency_stats.frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
 
@@ -718,7 +718,7 @@ class AnalyticsPanel:
 
         rec_title = self.theme.create_subtitle_label(
             recommendations_frame,
-            text="💡 Recommandations"
+            text="[INFO] Recommandations"
         )
         rec_title.pack(pady=(15, 10))
 
@@ -736,11 +736,11 @@ class AnalyticsPanel:
 
         # Recommandations initiales
         recommendations = [
-            "• Optimiser les temps de pause entre combats",
-            "• Améliorer la précision du pathfinding",
-            "• Réduire les délais d'interaction avec les NPCs",
-            "• Ajuster la stratégie de combat pour certains mobs",
-            "• Optimiser l'ordre des quêtes"
+            "- Optimiser les temps de pause entre combats",
+            "- Améliorer la précision du pathfinding",
+            "- Réduire les délais d'interaction avec les NPCs",
+            "- Ajuster la stratégie de combat pour certains mobs",
+            "- Optimiser l'ordre des quêtes"
         ]
 
         for rec in recommendations:
@@ -751,7 +751,7 @@ class AnalyticsPanel:
     def create_statistics_section(self):
         """Section statistiques globales"""
         stats_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(stats_frame, text="📋 Statistiques")
+        self.notebook.add(stats_frame, text=" Statistiques")
 
         # Container avec scroll
         canvas = tk.Canvas(
@@ -778,7 +778,7 @@ class AnalyticsPanel:
         session_stats = StatisticsWidget(
             scrollable_frame,
             self.theme,
-            "🕐 Session Actuelle"
+            " Session Actuelle"
         )
         session_stats.frame.pack(fill=tk.X, pady=(0, 20))
 
@@ -792,7 +792,7 @@ class AnalyticsPanel:
         global_stats = StatisticsWidget(
             scrollable_frame,
             self.theme,
-            "🌍 Statistiques Globales"
+            " Statistiques Globales"
         )
         global_stats.frame.pack(fill=tk.X, pady=(0, 20))
 
@@ -806,7 +806,7 @@ class AnalyticsPanel:
         records_stats = StatisticsWidget(
             scrollable_frame,
             self.theme,
-            "🏆 Records"
+            " Records"
         )
         records_stats.frame.pack(fill=tk.X, pady=(0, 20))
 
@@ -986,18 +986,18 @@ class AnalyticsPanel:
         </head>
         <body>
             <div class="header">
-                <h1>🤖 Rapport Analytics DOFUS AlphaStar</h1>
+                <h1> Rapport Analytics DOFUS AlphaStar</h1>
                 <p>Généré le {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
             </div>
 
             <div class="section">
-                <h2>📊 Résumé de Session</h2>
+                <h2>[STATS] Résumé de Session</h2>
                 <div class="stat"><span>Durée totale:</span><span>{len(self.analytics_data)} points de données</span></div>
                 <div class="stat"><span>Efficacité moyenne:</span><span>N/A</span></div>
             </div>
 
             <div class="section">
-                <h2>📈 Données Collectées</h2>
+                <h2>[CHART] Données Collectées</h2>
                 <p>Total de {len(self.analytics_data)} points de données analytics</p>
             </div>
         </body>

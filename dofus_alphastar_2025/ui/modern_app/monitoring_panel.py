@@ -113,21 +113,21 @@ class LogConsole:
         # Boutons d'action
         clear_btn = self.theme.create_secondary_button(
             toolbar,
-            text="🗑️ Effacer",
+            text="️ Effacer",
             command=self.clear_logs
         )
         clear_btn.pack(side=tk.LEFT, padx=(0, 5))
 
         export_btn = self.theme.create_secondary_button(
             toolbar,
-            text="💾 Exporter",
+            text="[SAVE] Exporter",
             command=self.export_logs
         )
         export_btn.pack(side=tk.LEFT, padx=(0, 5))
 
         pause_btn = self.theme.create_secondary_button(
             toolbar,
-            text="⏸️ Pause",
+            text="||️ Pause",
             command=self.toggle_pause
         )
         pause_btn.pack(side=tk.LEFT, padx=(0, 10))
@@ -501,7 +501,7 @@ class SystemMonitor:
         # Titre
         title = self.theme.create_subtitle_label(
             self.frame,
-            text="💻 Monitoring Système"
+            text=" Monitoring Système"
         )
         title.pack(pady=(15, 10))
 
@@ -593,7 +593,7 @@ class DebugInspector:
         # Titre
         title = self.theme.create_subtitle_label(
             self.frame,
-            text="🔍 Inspecteur Debug"
+            text="[SEARCH] Inspecteur Debug"
         )
         title.pack(pady=(15, 10))
 
@@ -622,14 +622,14 @@ class DebugInspector:
 
         refresh_btn = self.theme.create_secondary_button(
             controls_frame,
-            text="🔄 Actualiser",
+            text="[RELOAD] Actualiser",
             command=self.refresh_variables
         )
         refresh_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         inspect_btn = self.theme.create_secondary_button(
             controls_frame,
-            text="🔍 Inspecter",
+            text="[SEARCH] Inspecter",
             command=self.inspect_selected
         )
         inspect_btn.pack(side=tk.LEFT)
@@ -711,7 +711,7 @@ class MonitoringPanel:
 
         title_label = self.theme.create_title_label(
             header_frame,
-            text="🔍 Monitoring et Debug"
+            text="[SEARCH] Monitoring et Debug"
         )
         title_label.pack(side=tk.LEFT)
 
@@ -729,19 +729,19 @@ class MonitoringPanel:
 
         # Console de logs
         logs_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(logs_frame, text="📄 Logs")
+        self.notebook.add(logs_frame, text=" Logs")
 
         self.log_console = LogConsole(logs_frame, self.theme)
 
         # Monitoring système
         system_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(system_frame, text="💻 Système")
+        self.notebook.add(system_frame, text=" Système")
 
         self.system_monitor = SystemMonitor(system_frame, self.theme)
 
         # Debug inspector
         debug_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(debug_frame, text="🔍 Debug")
+        self.notebook.add(debug_frame, text="[SEARCH] Debug")
 
         self.debug_inspector = DebugInspector(debug_frame, self.theme)
 

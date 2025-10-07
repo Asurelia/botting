@@ -1,0 +1,107 @@
+{
+  "quest_id": "farming_loop_astrub_001",
+  "name": "Boucle de Farm - Forêt d'Astrub",
+  "description": "Farm optimisé dans la forêt d'Astrub pour level 15-30",
+  "level_required": 15,
+  "level_max": 30,
+  "repeatable": true,
+  "category": "farming",
+  "estimated_duration": 1800,
+  "objectives": [
+    {
+      "objective_id": "farm_001",
+      "type": "farm_resources",
+      "description": "Récolter 20 Bois de Frêne",
+      "resource_type": "Bois de Frêne",
+      "quantity_required": 20,
+      "profession_required": "Bûcheron",
+      "level_required": 10,
+      "map_hints": ["astrub_forest_west", "astrub_forest_center"]
+    },
+    {
+      "objective_id": "farm_002",
+      "type": "kill_monsters",
+      "description": "Tuer 15 Tofus",
+      "monster_type": "Tofu",
+      "quantity_required": 15,
+      "xp_per_kill": 50,
+      "map_hints": ["astrub_plains", "astrub_farm"]
+    },
+    {
+      "objective_id": "farm_003",
+      "type": "kill_monsters",
+      "description": "Tuer 10 Pious",
+      "monster_type": "Pious",
+      "quantity_required": 10,
+      "xp_per_kill": 75,
+      "map_hints": ["astrub_cemetery"]
+    },
+    {
+      "objective_id": "farm_004",
+      "type": "sell_loot",
+      "description": "Vendre le butin au HDV",
+      "location": "astrub_hdv",
+      "estimated_kamas": 5000
+    }
+  ],
+  "optimal_path": [
+    {
+      "step": 1,
+      "action": "zaap_to",
+      "destination": "Astrub - Forêt",
+      "description": "Téléportation vers la forêt d'Astrub"
+    },
+    {
+      "step": 2,
+      "action": "farm_resources",
+      "target": "Bois de Frêne",
+      "zone": "astrub_forest_west",
+      "duration_estimate": 600
+    },
+    {
+      "step": 3,
+      "action": "travel_to",
+      "destination": "astrub_plains",
+      "description": "Se déplacer vers les plaines"
+    },
+    {
+      "step": 4,
+      "action": "farm_monsters",
+      "target": "Tofu",
+      "zone": "astrub_plains",
+      "duration_estimate": 450
+    },
+    {
+      "step": 5,
+      "action": "travel_to",
+      "destination": "astrub_cemetery",
+      "description": "Aller au cimetière"
+    },
+    {
+      "step": 6,
+      "action": "farm_monsters",
+      "target": "Pious",
+      "zone": "astrub_cemetery",
+      "duration_estimate": 400
+    },
+    {
+      "step": 7,
+      "action": "travel_to",
+      "destination": "astrub_hdv",
+      "description": "Retour à l'HDV"
+    },
+    {
+      "step": 8,
+      "action": "sell_loot",
+      "location": "astrub_hdv",
+      "duration_estimate": 120
+    }
+  ],
+  "rewards_per_loop": {
+    "xp": 1500,
+    "kamas": 5000,
+    "profession_xp": {
+      "Bûcheron": 400
+    }
+  }
+}

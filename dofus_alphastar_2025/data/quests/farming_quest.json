@@ -1,0 +1,116 @@
+{
+  "quest_id": "farming_basics",
+  "name": "Les Bases du Farming",
+  "category": "farming",
+  "level_requirement": 10,
+  "description": "Apprenez les bases du farming en récoltant des ressources et en combattant des monstres",
+  "objectives": [
+    {
+      "objective_id": "gather_wood",
+      "type": "gathering",
+      "description": "Récolter 10 Bois de Frêne",
+      "target": "Frêne",
+      "count": 10,
+      "profession": "Bûcheron",
+      "location": {
+        "map": "ganymede_east",
+        "position": [1000, 400]
+      },
+      "completion_criteria": {
+        "items_gathered": 10,
+        "item_type": "wood_ash"
+      },
+      "rewards": {
+        "xp": 500,
+        "profession_xp": {"Bûcheron": 200}
+      }
+    },
+    {
+      "objective_id": "kill_sangliers",
+      "type": "combat",
+      "description": "Vaincre 10 Sangliers",
+      "target": "Sanglier",
+      "count": 10,
+      "location": {
+        "map": "ganymede_east",
+        "position": [900, 200]
+      },
+      "completion_criteria": {
+        "kills": 10,
+        "monster_type": "sanglier"
+      },
+      "rewards": {
+        "xp": 800,
+        "kamas": 200,
+        "items": ["Défense de Sanglier", "Viande de Sanglier"]
+      }
+    },
+    {
+      "objective_id": "kill_moskitos",
+      "type": "combat",
+      "description": "Vaincre 8 Moskitos",
+      "target": "Moskito",
+      "count": 8,
+      "location": {
+        "map": "ganymede_east",
+        "position": [1100, 350]
+      },
+      "completion_criteria": {
+        "kills": 8,
+        "monster_type": "moskito"
+      },
+      "rewards": {
+        "xp": 600,
+        "kamas": 150,
+        "items": ["Aile de Moskito"]
+      }
+    },
+    {
+      "objective_id": "sell_loot",
+      "type": "economy",
+      "description": "Vendre le butin au marché",
+      "location": {
+        "map": "ganymede_center",
+        "position": [380, 290]
+      },
+      "completion_criteria": {
+        "items_sold": ["Défense de Sanglier", "Aile de Moskito"],
+        "min_kamas_earned": 100
+      },
+      "rewards": {
+        "xp": 300,
+        "kamas": 50
+      }
+    }
+  ],
+  "sequential": true,
+  "repeatable": true,
+  "time_limit": 3600,
+  "prerequisites": ["ganymede_tutorial"],
+  "rewards": {
+    "total_xp": 2200,
+    "total_kamas": 400,
+    "items": ["Sac de Voyage", "Parchemin de Téléportation"],
+    "title": "Farmeur Débutant"
+  },
+  "navigation_hints": {
+    "optimal_path": [
+      "ganymede_center",
+      "ganymede_east",
+      "ganymede_center"
+    ],
+    "estimated_duration": 1800,
+    "difficulty": "easy"
+  },
+  "farming_strategy": {
+    "recommended_class": "all",
+    "optimal_level": 12,
+    "expected_profit": 500,
+    "resource_value": {
+      "wood_ash": 10,
+      "defense_sanglier": 15,
+      "wing_moskito": 12,
+      "meat_sanglier": 8
+    }
+  }
+}

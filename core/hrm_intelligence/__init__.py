@@ -1,1 +1,0 @@
-# HRM Intelligence Module pour TacticalBot

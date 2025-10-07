@@ -1,0 +1,319 @@
+{
+  "guide_id": "farming_low_level_001",
+  "title": "Guide de Farming - Niveaux 1-50",
+  "author": "AlphaStar System",
+  "version": "1.0",
+  "last_updated": "2025-01-01",
+  "target_level_range": [1, 50],
+  "strategies": [
+    {
+      "strategy_id": "strat_001",
+      "name": "Farm Tofu (Niveau 1-10)",
+      "level_range": [1, 10],
+      "difficulty": "beginner",
+      "profitability_score": 6.5,
+      "xp_efficiency_score": 7.0,
+      "description": "Farm basique de Tofus dans les plaines d'Astrub",
+      "prerequisites": {
+        "level_min": 1,
+        "kamas_needed": 0,
+        "equipment_recommended": []
+      },
+      "location": {
+        "zone": "astrub_plains",
+        "maps": ["plains_001"],
+        "zaap_nearest": "zaap_astrub"
+      },
+      "targets": [
+        {
+          "monster_type": "Tofu",
+          "level": [1, 5],
+          "priority": "high",
+          "xp_per_kill": 20,
+          "drop_highlights": ["Plume de Tofu", "Viande de Tofu"],
+          "combat_strategy": "Attaque directe, sorts basiques"
+        }
+      ],
+      "estimated_gains_per_hour": {
+        "xp": 500,
+        "kamas": 1000,
+        "drops_value": 800
+      },
+      "tips": [
+        "Rester proche du Zaap pour vendre régulièrement",
+        "Accepter les groupes de 2-3 Tofus maximum au début",
+        "Ramasser toutes les ressources (Blé) en passant"
+      ]
+    },
+    {
+      "strategy_id": "strat_002",
+      "name": "Farm Bouftou (Niveau 10-20)",
+      "level_range": [10, 20],
+      "difficulty": "beginner",
+      "profitability_score": 7.0,
+      "xp_efficiency_score": 7.5,
+      "description": "Farm de Bouftous avec meilleur XP et drops",
+      "prerequisites": {
+        "level_min": 10,
+        "kamas_needed": 500,
+        "equipment_recommended": ["Arme niveau 10+"]
+      },
+      "location": {
+        "zone": "astrub_plains",
+        "maps": ["plains_001", "plains_002"],
+        "zaap_nearest": "zaap_astrub"
+      },
+      "targets": [
+        {
+          "monster_type": "Bouftou",
+          "level": [5, 15],
+          "priority": "high",
+          "xp_per_kill": 75,
+          "drop_highlights": ["Poil de Bouftou", "Cornes de Bouftou"],
+          "combat_strategy": "Focus DPS, attention aux groupes de 3+"
+        }
+      ],
+      "estimated_gains_per_hour": {
+        "xp": 1200,
+        "kamas": 2500,
+        "drops_value": 2000
+      },
+      "tips": [
+        "Prioriser les groupes de 1-2 Bouftous",
+        "Utiliser les sorts AoE si classe appropriée",
+        "Vendre les drops au HDV régulièrement"
+      ]
+    },
+    {
+      "strategy_id": "strat_003",
+      "name": "Farm Forêt Mixte (Niveau 15-30)",
+      "level_range": [15, 30],
+      "difficulty": "intermediate",
+      "profitability_score": 8.5,
+      "xp_efficiency_score": 8.0,
+      "description": "Farm combiné monstres + ressources en forêt",
+      "prerequisites": {
+        "level_min": 15,
+        "kamas_needed": 2000,
+        "equipment_recommended": ["Set niveau 15+"],
+        "professions_recommended": ["Bûcheron 10+", "Alchimiste 10+"]
+      },
+      "location": {
+        "zone": "astrub_forest",
+        "maps": ["forest_west", "forest_center"],
+        "zaap_nearest": "zaap_astrub"
+      },
+      "targets": [
+        {
+          "monster_type": "Moskito",
+          "level": [10, 20],
+          "priority": "high",
+          "xp_per_kill": 150,
+          "drop_highlights": ["Ailes de Moskito", "Dards"],
+          "combat_strategy": "AoE efficace, groupes de 3-4 OK"
+        },
+        {
+          "monster_type": "Arakne",
+          "level": [15, 25],
+          "priority": "medium",
+          "xp_per_kill": 200,
+          "drop_highlights": ["Soie d'Arakne", "Venin"],
+          "combat_strategy": "Single target, dangereux en groupe"
+        }
+      ],
+      "resources_to_gather": [
+        {
+          "resource_type": "Frêne",
+          "profession": "Bûcheron",
+          "level_required": 10,
+          "value_per_unit": 50,
+          "gather_time": 5
+        },
+        {
+          "resource_type": "Ortie",
+          "profession": "Alchimiste",
+          "level_required": 10,
+          "value_per_unit": 30,
+          "gather_time": 4
+        }
+      ],
+      "estimated_gains_per_hour": {
+        "xp": 3000,
+        "kamas": 6000,
+        "profession_xp": {
+          "Bûcheron": 400,
+          "Alchimiste": 300
+        }
+      },
+      "optimal_route": [
+        "Zaap → Forêt Ouest",
+        "Farm Moskitos + récolte Frêne (10 min)",
+        "Déplacement Forêt Centre",
+        "Farm Araknes + récolte Ortie (10 min)",
+        "Retour HDV pour vendre (5 min)",
+        "Répéter"
+      ],
+      "tips": [
+        "Alterner combat et récolte pour optimiser le temps",
+        "Les Moskitos en groupe de 4 donnent bonus XP",
+        "Vendre les ressources séparément pour meilleur prix",
+        "Garder les Soies d'Arakne pour craft plus tard"
+      ]
+    },
+    {
+      "strategy_id": "strat_004",
+      "name": "Farm Cimetière (Niveau 20-40)",
+      "level_range": [20, 40],
+      "difficulty": "intermediate",
+      "profitability_score": 9.0,
+      "xp_efficiency_score": 8.5,
+      "description": "Farm intensif au cimetière, excellent XP",
+      "prerequisites": {
+        "level_min": 20,
+        "kamas_needed": 5000,
+        "equipment_recommended": ["Set niveau 25+", "Potion HP recommandée"]
+      },
+      "location": {
+        "zone": "astrub_cemetery",
+        "maps": ["cemetery_entrance", "cemetery_inner"],
+        "zaap_nearest": "zaap_astrub"
+      },
+      "targets": [
+        {
+          "monster_type": "Pious",
+          "level": [20, 35],
+          "priority": "high",
+          "xp_per_kill": 300,
+          "drop_highlights": ["Os de Pious", "Etoffe Maudite"],
+          "combat_strategy": "AoE + heal, groupes 2-4 optimal"
+        },
+        {
+          "monster_type": "Chafer",
+          "level": [25, 40],
+          "priority": "medium",
+          "xp_per_kill": 400,
+          "drop_highlights": ["Os de Chafer", "Clef de Donjon"],
+          "combat_strategy": "Prudent, dangereux en groupe"
+        }
+      ],
+      "estimated_gains_per_hour": {
+        "xp": 6000,
+        "kamas": 10000,
+        "drops_value": 8000
+      },
+      "tips": [
+        "Emmener potions HP, les Chafers cognent fort",
+        "Les Pious en groupe de 4 sont très rentables",
+        "Les clefs de donjon se vendent très bien",
+        "Possibilité de faire le donjon Chafer ensuite"
+      ],
+      "warnings": [
+        "Zone PvP possible selon serveur",
+        "Groupes de Chafers dangereux pour niveau < 25"
+      ]
+    },
+    {
+      "strategy_id": "strat_005",
+      "name": "Souterrains Intensif (Niveau 30-50)",
+      "level_range": [30, 50],
+      "difficulty": "advanced",
+      "profitability_score": 9.5,
+      "xp_efficiency_score": 9.0,
+      "description": "Farm hardcore dans les souterrains",
+      "prerequisites": {
+        "level_min": 30,
+        "kamas_needed": 10000,
+        "equipment_recommended": ["Set niveau 35+", "Multiples potions"],
+        "professions_recommended": ["Mineur 20+"]
+      },
+      "location": {
+        "zone": "astrub_underground",
+        "maps": ["underground_001", "underground_002"],
+        "zaap_nearest": "zaap_astrub"
+      },
+      "targets": [
+        {
+          "monster_type": "Larve des Égouts",
+          "level": [30, 45],
+          "priority": "high",
+          "xp_per_kill": 500,
+          "drop_highlights": ["Oeil de Larve", "Bave"],
+          "combat_strategy": "AoE massif, groupes de 5-6 courants"
+        }
+      ],
+      "resources_to_gather": [
+        {
+          "resource_type": "Fer",
+          "profession": "Mineur",
+          "level_required": 20,
+          "value_per_unit": 150,
+          "gather_time": 8
+        }
+      ],
+      "estimated_gains_per_hour": {
+        "xp": 12000,
+        "kamas": 20000,
+        "profession_xp": {
+          "Mineur": 800
+        }
+      },
+      "tips": [
+        "Meilleure XP/heure du jeu pour ces niveaux",
+        "Emmener beaucoup de pain et potions",
+        "Le Fer se vend très cher",
+        "Possibilité de farm 24/7 car zone isolée"
+      ],
+      "warnings": [
+        "Difficile en solo pour niveau < 35",
+        "Longue distance depuis Zaap",
+        "Risque de perdre beaucoup de pods"
+      ]
+    }
+  ],
+  "general_tips": {
+    "inventory_management": [
+      "Vider pods avant session de farm",
+      "Prioriser drops de valeur si pods pleins",
+      "Utiliser mule si farm longue durée"
+    ],
+    "combat_efficiency": [
+      "Toujours avoir pain/potions",
+      "Connaître ses limites en nombre d'ennemis",
+      "Apprendre patterns des monstres",
+      "Utiliser les combos de sorts optimaux"
+    ],
+    "economic_optimization": [
+      "Vérifier prix HDV avant de farmer",
+      "Vendre en lots pour gagner du temps",
+      "Garder certains drops pour craft perso",
+      "Éviter de vendre pendant heures creuses"
+    ]
+  },
+  "progression_path": [
+    {
+      "level_range": [1, 10],
+      "recommended_strategy": "strat_001",
+      "focus": "Apprendre les bases du combat"
+    },
+    {
+      "level_range": [10, 15],
+      "recommended_strategy": "strat_002",
+      "focus": "Améliorer équipement"
+    },
+    {
+      "level_range": [15, 30],
+      "recommended_strategy": "strat_003",
+      "focus": "Développer professions + farm"
+    },
+    {
+      "level_range": [30, 40],
+      "recommended_strategy": "strat_004",
+      "focus": "Farm intensif pour kamas"
+    },
+    {
+      "level_range": [40, 50],
+      "recommended_strategy": "strat_005",
+      "focus": "Maximiser XP/heure"
+    }
+  ]
+}

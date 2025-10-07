@@ -17,6 +17,12 @@ from .control_panel import ControlPanel
 from .monitoring_panel import MonitoringPanel
 from .config_panel import ConfigPanel
 from .analytics_panel import AnalyticsPanel
+from .logs_learning_panel import LogsLearningPanel
+from .vision_panel import VisionPanel
+from .training_panel import TrainingPanel
+from .combat_panel import CombatPanel
+from .economy_panel import EconomyPanel
+from .navigation_panel import NavigationPanel
 
 class StatusBar:
     """Barre de statut en bas de l'application"""
@@ -36,7 +42,7 @@ class StatusBar:
 
         # Labels de statut
         self.status_label = tk.Label(self.frame,
-                                   text="🔴 Arrêté",
+                                   text=" Arrêté",
                                    bg=self.colors.bg_secondary,
                                    fg=self.colors.text_secondary,
                                    font=self.theme.get_fonts()["status"],
@@ -62,12 +68,12 @@ class StatusBar:
     def update_status(self, bot_state: BotState, action: str = None):
         """Met à jour le statut du bot"""
         status_icons = {
-            BotState.STOPPED: "🔴",
-            BotState.STARTING: "🟡",
-            BotState.RUNNING: "🟢",
-            BotState.PAUSED: "⏸️",
-            BotState.STOPPING: "🟡",
-            BotState.ERROR: "❌"
+            BotState.STOPPED: "",
+            BotState.STARTING: "",
+            BotState.RUNNING: "",
+            BotState.PAUSED: "||️",
+            BotState.STOPPING: "",
+            BotState.ERROR: "[ERROR]"
         }
 
         status_texts = {
@@ -79,7 +85,7 @@ class StatusBar:
             BotState.ERROR: "Erreur"
         }
 
-        icon = status_icons.get(bot_state, "⚪")
+        icon = status_icons.get(bot_state, "")
         text = status_texts.get(bot_state, "Inconnu")
 
         if action and bot_state == BotState.RUNNING:
@@ -111,43 +117,141 @@ class MenuBar:
 
         # Menu Fichier
         file_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label="Fichier", menu=file_menu)
-        file_menu.add_command(label="Nouveau profil", command=self.new_profile)
-        file_menu.add_command(label="Charger profil", command=self.load_profile)
-        file_menu.add_command(label="Sauvegarder profil", command=self.save_profile)
+        self.menubar.add_cascade(label="📁 Fichier", menu=file_menu)
+        file_menu.add_command(label="🆕 Nouveau profil", command=self.new_profile)
+        file_menu.add_command(label="📂 Charger profil", command=self.load_profile)
+        file_menu.add_command(label="💾 Sauvegarder profil", command=self.save_profile)
         file_menu.add_separator()
-        file_menu.add_command(label="Quitter", command=self.quit_app)
+        file_menu.add_command(label="📤 Export configuration", command=self.export_config)
+        file_menu.add_command(label="📥 Import configuration", command=self.import_config)
+        file_menu.add_separator()
+
+        # Sous-menu Logs
+        logs_submenu = tk.Menu(file_menu, tearoff=0)
+        file_menu.add_cascade(label="📝 Logs", menu=logs_submenu)
+        logs_submenu.add_command(label="📂 Ouvrir dossier logs", command=self.open_logs_folder)
+        logs_submenu.add_command(label="📋 Exporter logs", command=self.export_logs)
+        logs_submenu.add_command(label="🗑️ Nettoyer logs anciens", command=self.clean_old_logs)
+
+        # Sous-menu Screenshots
+        screenshots_submenu = tk.Menu(file_menu, tearoff=0)
+        file_menu.add_cascade(label="📸 Screenshots", menu=screenshots_submenu)
+        screenshots_submenu.add_command(label="📂 Ouvrir dossier screenshots", command=self.open_screenshots_folder)
+        screenshots_submenu.add_command(label="🗑️ Nettoyer screenshots anciens", command=self.clean_old_screenshots)
+
+        file_menu.add_separator()
+        file_menu.add_command(label="❌ Quitter", command=self.quit_app)
 
         # Menu Bot
         bot_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label="Bot", menu=bot_menu)
-        bot_menu.add_command(label="Démarrer", command=self.start_bot)
-        bot_menu.add_command(label="Arrêter", command=self.stop_bot)
-        bot_menu.add_command(label="Pause", command=self.pause_bot)
-        bot_menu.add_command(label="Reprendre", command=self.resume_bot)
+        self.menubar.add_cascade(label="🤖 Bot", menu=bot_menu)
+        bot_menu.add_command(label="▶️ Démarrer", command=self.start_bot)
+        bot_menu.add_command(label="⏹️ Arrêter", command=self.stop_bot)
+        bot_menu.add_command(label="⏸️ Pause", command=self.pause_bot)
+        bot_menu.add_command(label="▶️ Reprendre", command=self.resume_bot)
         bot_menu.add_separator()
-        bot_menu.add_command(label="Redémarrer", command=self.restart_bot)
+
+        # Sous-menu Mode
+        mode_submenu = tk.Menu(bot_menu, tearoff=0)
+        bot_menu.add_cascade(label="🎮 Mode", menu=mode_submenu)
+        mode_submenu.add_command(label="👁️ Observation (sécurisé)", command=lambda: self.set_mode("observation"))
+        mode_submenu.add_command(label="⚡ Actif (risque)", command=lambda: self.set_mode("active"))
+        mode_submenu.add_command(label="🎓 Training (apprentissage)", command=lambda: self.set_mode("training"))
+
+        bot_menu.add_separator()
+        bot_menu.add_command(label="🔄 Redémarrer", command=self.restart_bot)
+        bot_menu.add_command(label="🔄 Redémarrer systèmes", command=self.restart_systems)
+        bot_menu.add_command(label="🆘 Emergency Stop (F12)", command=self.emergency_stop)
+
+        # Menu Vision
+        vision_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label="👁️ Vision", menu=vision_menu)
+        vision_menu.add_command(label="🎯 Calibrer maintenant", command=self.calibrate_vision)
+        vision_menu.add_command(label="✅ Test capture", command=self.test_vision_capture)
+        vision_menu.add_command(label="⚙️ Ajuster détection", command=self.adjust_vision_detection)
+        vision_menu.add_separator()
+
+        # Sous-menu Screenshots
+        screenshot_submenu = tk.Menu(vision_menu, tearoff=0)
+        vision_menu.add_cascade(label="📸 Screenshots", menu=screenshot_submenu)
+        screenshot_submenu.add_command(label="📷 Prendre maintenant", command=self.take_screenshot_now)
+        screenshot_submenu.add_command(label="🖼️ Gallery", command=self.open_screenshot_gallery)
+        screenshot_submenu.add_command(label="🎬 Enregistrer session", command=self.record_session)
+
+        vision_menu.add_separator()
+        vision_menu.add_command(label="🐛 Debug mode ON/OFF", command=self.toggle_debug_vision)
+
+        # Menu Apprentissage
+        learning_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label="🎓 Apprentissage", menu=learning_menu)
+        learning_menu.add_command(label="📊 Statistiques globales", command=self.show_learning_stats)
+        learning_menu.add_command(label="⏱️ Timeline décisions", command=self.show_decisions_timeline)
+        learning_menu.add_separator()
+        learning_menu.add_command(label="🧠 Entraîner modèle HRM", command=self.train_hrm_model)
+        learning_menu.add_command(label="✅ Valider modèle", command=self.validate_model)
+        learning_menu.add_separator()
+        learning_menu.add_command(label="📥 Importer feedbacks", command=self.import_feedbacks)
+        learning_menu.add_command(label="📤 Exporter dataset", command=self.export_dataset)
+        learning_menu.add_separator()
+        learning_menu.add_command(label="🗑️ Nettoyer historique", command=self.clean_learning_history)
+
+        # Menu Économie
+        economy_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label="💰 Économie", menu=economy_menu)
+        economy_menu.add_command(label="🏪 Scanner HDV maintenant", command=self.scan_hdv_now)
+        economy_menu.add_command(label="💎 Voir opportunités", command=self.show_opportunities)
+        economy_menu.add_command(label="🧮 Calculateur profit", command=self.open_profit_calculator)
+        economy_menu.add_separator()
+        economy_menu.add_command(label="🔨 Queue craft", command=self.show_craft_queue)
+        economy_menu.add_command(label="🎒 Inventaire", command=self.show_inventory)
 
         # Menu Outils
         tools_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label="Outils", menu=tools_menu)
-        tools_menu.add_command(label="Test systèmes", command=self.test_systems)
-        tools_menu.add_command(label="Calibrage vision", command=self.calibrate_vision)
-        tools_menu.add_command(label="Analyse performance", command=self.analyze_performance)
+        self.menubar.add_cascade(label="🔧 Outils", menu=tools_menu)
+        tools_menu.add_command(label="✅ Test tous systèmes", command=self.test_systems)
+        tools_menu.add_command(label="📊 Benchmark performance", command=self.benchmark_performance)
+        tools_menu.add_command(label="📝 Analyse logs", command=self.analyze_logs)
+        tools_menu.add_separator()
+        tools_menu.add_command(label="🗑️ Nettoyer cache", command=self.clean_cache)
+        tools_menu.add_command(label="🔧 Réparer configuration", command=self.repair_config)
 
         # Menu Affichage
         view_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label="Affichage", menu=view_menu)
-        view_menu.add_command(label="Thème sombre", command=lambda: self.change_theme("dark"))
-        view_menu.add_command(label="Thème clair", command=lambda: self.change_theme("light"))
+        self.menubar.add_cascade(label="👁️ Affichage", menu=view_menu)
+
+        # Sous-menu Thème
+        theme_submenu = tk.Menu(view_menu, tearoff=0)
+        view_menu.add_cascade(label="🎨 Thème", menu=theme_submenu)
+        theme_submenu.add_command(label="🌙 Sombre", command=lambda: self.change_theme("dark"))
+        theme_submenu.add_command(label="☀️ Clair", command=lambda: self.change_theme("light"))
+        theme_submenu.add_command(label="🎨 Personnalisé", command=self.customize_theme)
+
         view_menu.add_separator()
-        view_menu.add_command(label="Plein écran", command=self.toggle_fullscreen)
+        view_menu.add_command(label="📏 Taille police", command=self.adjust_font_size)
+        view_menu.add_command(label="🔍 Transparence fenêtre", command=self.adjust_transparency)
+        view_menu.add_separator()
+        view_menu.add_command(label="🖥️ Plein écran (F11)", command=self.toggle_fullscreen)
+        view_menu.add_command(label="📌 Toujours au premier plan", command=self.toggle_always_on_top)
+        view_menu.add_command(label="📐 Mode compact", command=self.toggle_compact_mode)
+        view_menu.add_separator()
+
+        # Sous-menu Layout
+        layout_submenu = tk.Menu(view_menu, tearoff=0)
+        view_menu.add_cascade(label="📐 Layout", menu=layout_submenu)
+        layout_submenu.add_command(label="💾 Sauvegarder layout", command=self.save_layout)
+        layout_submenu.add_command(label="🔄 Reset layout", command=self.reset_layout)
 
         # Menu Aide
         help_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label="Aide", menu=help_menu)
-        help_menu.add_command(label="Documentation", command=self.show_docs)
-        help_menu.add_command(label="À propos", command=self.show_about)
+        self.menubar.add_cascade(label="❓ Aide", menu=help_menu)
+        help_menu.add_command(label="📖 Documentation", command=self.show_docs)
+        help_menu.add_command(label="🎓 Tutoriel interactif", command=self.show_tutorial)
+        help_menu.add_command(label="🎬 Vidéos", command=self.show_videos)
+        help_menu.add_separator()
+        help_menu.add_command(label="💬 Forum/Discord", command=self.open_community)
+        help_menu.add_command(label="🔄 Vérifier mises à jour", command=self.check_updates)
+        help_menu.add_separator()
+        help_menu.add_command(label="ℹ️ À propos", command=self.show_about)
 
     def new_profile(self):
         messagebox.showinfo("Nouveau profil", "Fonctionnalité à implémenter")
@@ -210,6 +314,162 @@ GPU: AMD 7800XT optimisé
 
 Développé avec Claude Code"""
         messagebox.showinfo("À propos", about_text)
+
+    # === NOUVELLES MÉTHODES POUR MENUS ENRICHIS ===
+
+    def export_config(self):
+        messagebox.showinfo("Export", "Export configuration - à implémenter")
+
+    def import_config(self):
+        messagebox.showinfo("Import", "Import configuration - à implémenter")
+
+    def open_logs_folder(self):
+        import os
+        import subprocess
+        logs_path = "logs"
+        if os.path.exists(logs_path):
+            subprocess.Popen(f'explorer "{os.path.abspath(logs_path)}"')
+        else:
+            messagebox.showwarning("Dossier introuvable", f"Le dossier {logs_path} n'existe pas")
+
+    def export_logs(self):
+        messagebox.showinfo("Export logs", "Export logs - à implémenter")
+
+    def clean_old_logs(self):
+        if messagebox.askyesno("Nettoyage", "Supprimer les logs de plus de 30 jours?"):
+            messagebox.showinfo("Nettoyage", "Logs nettoyés - à implémenter")
+
+    def open_screenshots_folder(self):
+        import os
+        import subprocess
+        screenshots_path = "screenshots"
+        if os.path.exists(screenshots_path):
+            subprocess.Popen(f'explorer "{os.path.abspath(screenshots_path)}"')
+        else:
+            messagebox.showwarning("Dossier introuvable", f"Le dossier {screenshots_path} n'existe pas")
+
+    def clean_old_screenshots(self):
+        if messagebox.askyesno("Nettoyage", "Supprimer les screenshots de plus de 7 jours?"):
+            messagebox.showinfo("Nettoyage", "Screenshots nettoyés - à implémenter")
+
+    def set_mode(self, mode):
+        messagebox.showinfo("Mode", f"Changement de mode: {mode} - à implémenter")
+
+    def restart_systems(self):
+        messagebox.showinfo("Redémarrage", "Redémarrage systèmes - à implémenter")
+
+    def emergency_stop(self):
+        if messagebox.askyesno("Emergency Stop", "Arrêter immédiatement TOUT?"):
+            self.app_controller.stop_bot()
+            messagebox.showinfo("Arrêté", "Bot arrêté en urgence")
+
+    def test_vision_capture(self):
+        messagebox.showinfo("Test", "Test capture vision - à implémenter")
+
+    def adjust_vision_detection(self):
+        messagebox.showinfo("Ajustement", "Ajustement détection - à implémenter")
+
+    def take_screenshot_now(self):
+        messagebox.showinfo("Screenshot", "Screenshot pris - à implémenter")
+
+    def open_screenshot_gallery(self):
+        messagebox.showinfo("Gallery", "Gallery screenshots - à implémenter")
+
+    def record_session(self):
+        messagebox.showinfo("Enregistrement", "Enregistrement session - à implémenter")
+
+    def toggle_debug_vision(self):
+        messagebox.showinfo("Debug", "Debug vision toggle - à implémenter")
+
+    def show_learning_stats(self):
+        messagebox.showinfo("Statistiques", "Statistiques apprentissage - à implémenter")
+
+    def show_decisions_timeline(self):
+        messagebox.showinfo("Timeline", "Timeline décisions - à implémenter")
+
+    def train_hrm_model(self):
+        if messagebox.askyesno("Entraînement", "Lancer entraînement HRM? (peut prendre du temps)"):
+            messagebox.showinfo("Entraînement", "Entraînement lancé - à implémenter")
+
+    def validate_model(self):
+        messagebox.showinfo("Validation", "Validation modèle - à implémenter")
+
+    def import_feedbacks(self):
+        messagebox.showinfo("Import", "Import feedbacks - à implémenter")
+
+    def export_dataset(self):
+        messagebox.showinfo("Export", "Export dataset - à implémenter")
+
+    def clean_learning_history(self):
+        if messagebox.askyesno("Nettoyage", "Nettoyer historique apprentissage?"):
+            messagebox.showinfo("Nettoyage", "Historique nettoyé - à implémenter")
+
+    def scan_hdv_now(self):
+        messagebox.showinfo("Scan HDV", "Scan HDV lancé - à implémenter")
+
+    def show_opportunities(self):
+        messagebox.showinfo("Opportunités", "Opportunités économiques - à implémenter")
+
+    def open_profit_calculator(self):
+        messagebox.showinfo("Calculateur", "Calculateur profit - à implémenter")
+
+    def show_craft_queue(self):
+        messagebox.showinfo("Queue craft", "Queue craft - à implémenter")
+
+    def show_inventory(self):
+        messagebox.showinfo("Inventaire", "Inventaire - à implémenter")
+
+    def benchmark_performance(self):
+        messagebox.showinfo("Benchmark", "Benchmark performance - à implémenter")
+
+    def analyze_logs(self):
+        messagebox.showinfo("Analyse", "Analyse logs - à implémenter")
+
+    def clean_cache(self):
+        if messagebox.askyesno("Nettoyage", "Nettoyer cache?"):
+            messagebox.showinfo("Nettoyage", "Cache nettoyé - à implémenter")
+
+    def repair_config(self):
+        if messagebox.askyesno("Réparation", "Réparer configuration?"):
+            messagebox.showinfo("Réparation", "Configuration réparée - à implémenter")
+
+    def customize_theme(self):
+        messagebox.showinfo("Thème", "Personnalisation thème - à implémenter")
+
+    def adjust_font_size(self):
+        messagebox.showinfo("Police", "Ajustement police - à implémenter")
+
+    def adjust_transparency(self):
+        messagebox.showinfo("Transparence", "Ajustement transparence - à implémenter")
+
+    def toggle_always_on_top(self):
+        current = self.main_window.root.attributes("-topmost")
+        self.main_window.root.attributes("-topmost", not current)
+        status = "activé" if not current else "désactivé"
+        messagebox.showinfo("Premier plan", f"Toujours au premier plan {status}")
+
+    def toggle_compact_mode(self):
+        messagebox.showinfo("Mode compact", "Mode compact - à implémenter")
+
+    def save_layout(self):
+        messagebox.showinfo("Layout", "Layout sauvegardé - à implémenter")
+
+    def reset_layout(self):
+        if messagebox.askyesno("Reset", "Reset layout par défaut?"):
+            messagebox.showinfo("Reset", "Layout reset - à implémenter")
+
+    def show_tutorial(self):
+        messagebox.showinfo("Tutoriel", "Tutoriel interactif - à implémenter")
+
+    def show_videos(self):
+        messagebox.showinfo("Vidéos", "Vidéos tutoriels - à implémenter")
+
+    def open_community(self):
+        import webbrowser
+        webbrowser.open("https://discord.gg/dofus-alphastar")  # Exemple
+
+    def check_updates(self):
+        messagebox.showinfo("Mises à jour", "Vérification mises à jour - à implémenter")
 
 class MainWindow:
     """Fenêtre principale de l'application"""
@@ -294,7 +554,7 @@ class MainWindow:
 
         title_label = self.theme_manager.create_title_label(
             title_frame,
-            "🎮 DOFUS AlphaStar 2025"
+            "[GAME] DOFUS AlphaStar 2025"
         )
         title_label.pack(side=tk.TOP, anchor="w")
 
@@ -311,14 +571,14 @@ class MainWindow:
         # Boutons de contrôle
         self.start_button = self.theme_manager.create_primary_button(
             controls_frame,
-            "▶ Démarrer",
+            "> Démarrer",
             command=self.start_bot
         )
         self.start_button.pack(side=tk.LEFT, padx=5)
 
         self.stop_button = self.theme_manager.create_secondary_button(
             controls_frame,
-            "⏹ Arrêter",
+            "[] Arrêter",
             command=self.stop_bot,
             state="disabled"
         )
@@ -326,7 +586,7 @@ class MainWindow:
 
         self.pause_button = self.theme_manager.create_secondary_button(
             controls_frame,
-            "⏸ Pause",
+            "|| Pause",
             command=self.pause_bot,
             state="disabled"
         )
@@ -341,7 +601,7 @@ class MainWindow:
             self.app_controller,
             self.theme_manager
         )
-        self.notebook.add(self.dashboard_panel.frame, text="📊 Dashboard")
+        self.notebook.add(self.dashboard_panel.frame, text="🏠 Dashboard")
 
         # Contrôles
         self.control_panel = ControlPanel(
@@ -351,13 +611,13 @@ class MainWindow:
         )
         self.notebook.add(self.control_panel.frame, text="🎮 Contrôles")
 
-        # Monitoring
-        self.monitoring_panel = MonitoringPanel(
+        # Analytics
+        self.analytics_panel = AnalyticsPanel(
             self.notebook,
             self.app_controller,
             self.theme_manager
         )
-        self.notebook.add(self.monitoring_panel.frame, text="📈 Monitoring")
+        self.notebook.add(self.analytics_panel.frame, text="📊 Analytics")
 
         # Configuration
         self.config_panel = ConfigPanel(
@@ -367,13 +627,37 @@ class MainWindow:
         )
         self.notebook.add(self.config_panel.frame, text="⚙️ Configuration")
 
-        # Analytics
-        self.analytics_panel = AnalyticsPanel(
+        # Logs & Learning (NOUVEAU)
+        self.logs_learning_panel = LogsLearningPanel(self.notebook)
+        self.notebook.add(self.logs_learning_panel.get_panel(), text="📝 Logs & Learning")
+
+        # Vision Panel (NOUVEAU)
+        self.vision_panel = VisionPanel(self.notebook)
+        self.notebook.add(self.vision_panel.get_panel(), text="👁️ Vision")
+
+        # Training Panel (NOUVEAU)
+        self.training_panel = TrainingPanel(self.notebook)
+        self.notebook.add(self.training_panel.get_panel(), text="🎓 Training")
+
+        # Combat Panel (NOUVEAU)
+        self.combat_panel = CombatPanel(self.notebook)
+        self.notebook.add(self.combat_panel.get_panel(), text="⚔️ Combat")
+
+        # Economy Panel (NOUVEAU)
+        self.economy_panel = EconomyPanel(self.notebook)
+        self.notebook.add(self.economy_panel.get_panel(), text="💰 Économie")
+
+        # Navigation Panel (NOUVEAU)
+        self.navigation_panel = NavigationPanel(self.notebook)
+        self.notebook.add(self.navigation_panel.get_panel(), text="🗺️ Navigation")
+
+        # Monitoring
+        self.monitoring_panel = MonitoringPanel(
             self.notebook,
             self.app_controller,
             self.theme_manager
         )
-        self.notebook.add(self.analytics_panel.frame, text="📊 Analytics")
+        self.notebook.add(self.monitoring_panel.frame, text="📡 Monitoring")
 
     def setup_event_handlers(self):
         """Configure les gestionnaires d'événements"""
@@ -427,12 +711,12 @@ class MainWindow:
 
     def on_bot_paused(self, data):
         """Gestionnaire pause bot"""
-        self.pause_button.config(text="▶ Reprendre")
+        self.pause_button.config(text="> Reprendre")
         self.status_bar.update_status(BotState.PAUSED)
 
     def on_bot_resumed(self, data):
         """Gestionnaire reprise bot"""
-        self.pause_button.config(text="⏸ Pause")
+        self.pause_button.config(text="|| Pause")
         self.status_bar.update_status(BotState.RUNNING)
 
     def on_bot_error(self, data):

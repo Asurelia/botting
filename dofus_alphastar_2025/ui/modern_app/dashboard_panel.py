@@ -241,7 +241,7 @@ class DashboardPanel:
 
         title_label = self.theme.create_title_label(
             header_frame,
-            text="🤖 Dashboard AlphaStar DOFUS"
+            text=" Dashboard AlphaStar DOFUS"
         )
         title_label.pack(side=tk.LEFT)
 
@@ -285,6 +285,7 @@ class DashboardPanel:
         self.create_status_section()
         self.create_metrics_section()
         self.create_character_section()
+        self.create_minimap_section()  # NOUVEAU
         self.create_activity_section()
         self.create_charts_section()
 
@@ -296,7 +297,7 @@ class DashboardPanel:
         # Titre de section
         title = self.theme.create_subtitle_label(
             section_frame,
-            text="📊 État du Bot"
+            text="[STATS] État du Bot"
         )
         title.pack(pady=(15, 10))
 
@@ -308,10 +309,10 @@ class DashboardPanel:
         self.status_widgets = {}
 
         statuses = [
-            ("bot_status", "État", "🤖"),
-            ("quest_status", "Quête", "📋"),
-            ("health_status", "Santé", "❤️"),
-            ("connection_status", "Connexion", "🌐")
+            ("bot_status", "État", ""),
+            ("quest_status", "Quête", ""),
+            ("health_status", "Santé", "️"),
+            ("connection_status", "Connexion", "[WEB]")
         ]
 
         for i, (key, title, icon) in enumerate(statuses):
@@ -331,7 +332,7 @@ class DashboardPanel:
         # Titre
         title = self.theme.create_subtitle_label(
             section_frame,
-            text="📈 Métriques de Performance"
+            text="[CHART] Métriques de Performance"
         )
         title.pack(pady=(15, 10))
 
@@ -343,12 +344,12 @@ class DashboardPanel:
         self.metric_widgets = {}
 
         metrics = [
-            ("uptime", "Temps d'activité", "⏱️"),
-            ("quests", "Quêtes", "✅"),
+            ("uptime", "Temps d'activité", "[TIMER]"),
+            ("quests", "Quêtes", ""),
             ("experience", "Expérience", "⭐"),
-            ("kamas", "Kamas", "💰"),
-            ("fights", "Combats", "⚔️"),
-            ("success_rate", "Taux de succès", "🎯")
+            ("kamas", "Kamas", "[GOLD]"),
+            ("fights", "Combats", "[COMBAT]"),
+            ("success_rate", "Taux de succès", "[TARGET]")
         ]
 
         for i, (key, title, icon) in enumerate(metrics):
@@ -368,7 +369,7 @@ class DashboardPanel:
         # Titre
         title = self.theme.create_subtitle_label(
             section_frame,
-            text="👤 Informations Personnage"
+            text="[USER] Informations Personnage"
         )
         title.pack(pady=(15, 10))
 
@@ -380,12 +381,12 @@ class DashboardPanel:
         self.character_widgets = {}
 
         char_info = [
-            ("name", "Nom", "👤"),
-            ("level", "Niveau", "🔢"),
-            ("class", "Classe", "🏹"),
-            ("position", "Position", "📍"),
-            ("map", "Carte", "🗺️"),
-            ("energy", "Énergie", "⚡")
+            ("name", "Nom", "[USER]"),
+            ("level", "Niveau", ""),
+            ("class", "Classe", ""),
+            ("position", "Position", ""),
+            ("map", "Carte", "[MAP]"),
+            ("energy", "Énergie", "")
         ]
 
         for i, (key, title, icon) in enumerate(char_info):
@@ -397,6 +398,235 @@ class DashboardPanel:
         for i in range(3):
             char_grid.grid_columnconfigure(i, weight=1)
 
+    def create_minimap_section(self):
+        """Section minimap interactive"""
+        section_frame = self.theme.create_panel(self.scrollable_frame)
+        section_frame.pack(fill=tk.X, pady=(0, 20))
+
+        # Titre
+        title = self.theme.create_subtitle_label(
+            section_frame,
+            text="🗺️ Minimap & Navigation"
+        )
+        title.pack(pady=(15, 10))
+
+        # Container minimap
+        minimap_container = self.theme.create_frame(section_frame, "secondary")
+        minimap_container.pack(fill=tk.X, padx=15, pady=(0, 15))
+
+        # Canvas minimap
+        self.minimap_canvas = tk.Canvas(
+            minimap_container,
+            width=400,
+            height=300,
+            bg='#1a1a2e',
+            highlightthickness=1,
+            highlightbackground=self.theme.get_colors().border_light
+        )
+        self.minimap_canvas.pack(side=tk.LEFT, padx=10, pady=10)
+
+        # Bind events
+        self.minimap_canvas.bind("<Button-1>", self.on_minimap_click)
+        self.minimap_canvas.bind("<Motion>", self.on_minimap_hover)
+
+        # Infos minimap à droite
+        minimap_info_frame = self.theme.create_frame(minimap_container, "secondary")
+        minimap_info_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        # Position actuelle
+        pos_label = self.theme.create_body_label(
+            minimap_info_frame,
+            text="📍 Position actuelle:"
+        )
+        pos_label.pack(anchor=tk.W, pady=(0, 5))
+
+        self.minimap_pos_label = self.theme.create_body_label(
+            minimap_info_frame,
+            text="[0, 0] - Astrub",
+            fg=self.theme.get_colors().text_secondary
+        )
+        self.minimap_pos_label.pack(anchor=tk.W, padx=(20, 0), pady=(0, 10))
+
+        # Destination
+        dest_label = self.theme.create_body_label(
+            minimap_info_frame,
+            text="🎯 Destination:"
+        )
+        dest_label.pack(anchor=tk.W, pady=(0, 5))
+
+        self.minimap_dest_label = self.theme.create_body_label(
+            minimap_info_frame,
+            text="Aucune",
+            fg=self.theme.get_colors().text_secondary
+        )
+        self.minimap_dest_label.pack(anchor=tk.W, padx=(20, 0), pady=(0, 10))
+
+        # Stats navigation
+        nav_stats_label = self.theme.create_body_label(
+            minimap_info_frame,
+            text="📊 Stats navigation:"
+        )
+        nav_stats_label.pack(anchor=tk.W, pady=(0, 5))
+
+        self.minimap_stats_label = self.theme.create_body_label(
+            minimap_info_frame,
+            text="Cartes: 0\nDistance: 0 km\nTemps: 0m",
+            fg=self.theme.get_colors().text_secondary
+        )
+        self.minimap_stats_label.pack(anchor=tk.W, padx=(20, 0), pady=(0, 10))
+
+        # Boutons minimap
+        minimap_buttons = self.theme.create_frame(minimap_info_frame, "secondary")
+        minimap_buttons.pack(fill=tk.X, pady=(10, 0))
+
+        self.theme.create_secondary_button(
+            minimap_buttons,
+            "🧭 Navigation complète",
+            command=self.open_full_navigation
+        ).pack(fill=tk.X, pady=2)
+
+        self.theme.create_secondary_button(
+            minimap_buttons,
+            "🔄 Rafraîchir position",
+            command=self.refresh_minimap
+        ).pack(fill=tk.X, pady=2)
+
+        # Dessiner minimap initiale
+        self.draw_minimap()
+
+    def draw_minimap(self):
+        """Dessine la minimap"""
+        self.minimap_canvas.delete("all")
+
+        # Dimensions
+        width = 400
+        height = 300
+        cell_size = 20
+        center_x = width // 2
+        center_y = height // 2
+
+        # Grille
+        for i in range(-10, 11):
+            # Lignes verticales
+            x = center_x + i * cell_size
+            self.minimap_canvas.create_line(
+                x, 0, x, height,
+                fill='#2a2a3e', width=1
+            )
+            # Lignes horizontales
+            y = center_y + i * cell_size
+            self.minimap_canvas.create_line(
+                0, y, width, y,
+                fill='#2a2a3e', width=1
+            )
+
+        # Axes principaux
+        self.minimap_canvas.create_line(
+            center_x, 0, center_x, height,
+            fill='#4a4a5e', width=2
+        )
+        self.minimap_canvas.create_line(
+            0, center_y, width, center_y,
+            fill='#4a4a5e', width=2
+        )
+
+        # Points d'intérêt (waypoints)
+        waypoints = [
+            (0, 0, "Zaap Astrub", "cyan"),
+            (-1, 0, "Banque", "yellow"),
+            (-1, 2, "Bouftous", "orange"),
+            (1, 0, "HDV", "purple")
+        ]
+
+        for wx, wy, name, color in waypoints:
+            x = center_x + wx * cell_size
+            y = center_y - wy * cell_size
+
+            # Point
+            self.minimap_canvas.create_oval(
+                x - 5, y - 5, x + 5, y + 5,
+                fill=color, outline="white", width=1
+            )
+
+            # Label
+            self.minimap_canvas.create_text(
+                x, y - 12,
+                text=name,
+                fill="white",
+                font=("Arial", 7)
+            )
+
+        # Position actuelle (pulsante)
+        current_x, current_y = 0, 0  # Position démo
+        x = center_x + current_x * cell_size
+        y = center_y - current_y * cell_size
+
+        # Cercle extérieur pulsant
+        self.minimap_canvas.create_oval(
+            x - 12, y - 12, x + 12, y + 12,
+            fill="", outline="lime", width=2
+        )
+
+        # Point central
+        self.minimap_canvas.create_oval(
+            x - 6, y - 6, x + 6, y + 6,
+            fill="lime", outline="white", width=2
+        )
+
+        # Zones de danger (demo)
+        danger_zones = [
+            (5, -3, 2, "red"),  # Zone dangereuse
+        ]
+
+        for dx, dy, radius, color in danger_zones:
+            x = center_x + dx * cell_size
+            y = center_y - dy * cell_size
+            r = radius * cell_size
+
+            self.minimap_canvas.create_oval(
+                x - r, y - r, x + r, y + r,
+                outline=color, width=2, dash=(5, 5)
+            )
+
+    def on_minimap_click(self, event):
+        """Clic sur la minimap"""
+        # Calculer coordonnées
+        width = 400
+        height = 300
+        cell_size = 20
+        center_x = width // 2
+        center_y = height // 2
+
+        map_x = (event.x - center_x) // cell_size
+        map_y = -(event.y - center_y) // cell_size
+
+        self.minimap_dest_label.configure(text=f"[{map_x}, {map_y}]")
+        self.add_activity_log(f"[NAV] Destination définie: [{map_x}, {map_y}]")
+
+    def on_minimap_hover(self, event):
+        """Survol de la minimap"""
+        # Afficher coordonnées sous le curseur
+        width = 400
+        height = 300
+        cell_size = 20
+        center_x = width // 2
+        center_y = height // 2
+
+        map_x = (event.x - center_x) // cell_size
+        map_y = -(event.y - center_y) // cell_size
+
+        # Optionnel: afficher tooltip
+
+    def open_full_navigation(self):
+        """Ouvre le panel de navigation complet"""
+        self.add_activity_log("[UI] Ouverture navigation complète...")
+        # TODO: switch to navigation tab
+
+    def refresh_minimap(self):
+        """Rafraîchit la minimap"""
+        self.draw_minimap()
+        self.add_activity_log("[MAP] Minimap rafraîchie")
+
     def create_activity_section(self):
         """Section activité récente"""
         section_frame = self.theme.create_panel(self.scrollable_frame)
@@ -405,7 +635,7 @@ class DashboardPanel:
         # Titre
         title = self.theme.create_subtitle_label(
             section_frame,
-            text="📝 Activité Récente"
+            text="[NOTE] Activité Récente"
         )
         title.pack(pady=(15, 10))
 
@@ -432,8 +662,8 @@ class DashboardPanel:
         activity_scroll.pack(side=tk.RIGHT, fill=tk.Y, pady=10)
 
         # Messages initiaux
-        self.add_activity_log("🚀 Dashboard AlphaStar initialisé")
-        self.add_activity_log("📡 Connexion aux systèmes en cours...")
+        self.add_activity_log("[START] Dashboard AlphaStar initialisé")
+        self.add_activity_log("[API] Connexion aux systèmes en cours...")
 
     def create_charts_section(self):
         """Section graphiques temps réel"""
@@ -443,7 +673,7 @@ class DashboardPanel:
         # Titre
         title = self.theme.create_subtitle_label(
             section_frame,
-            text="📊 Graphiques Temps Réel"
+            text="[STATS] Graphiques Temps Réel"
         )
         title.pack(pady=(15, 10))
 
@@ -478,10 +708,10 @@ class DashboardPanel:
 
         level_icons = {
             "info": "ℹ️",
-            "success": "✅",
-            "warning": "⚠️",
-            "error": "❌",
-            "debug": "🔧"
+            "success": "",
+            "warning": "[WARNING]",
+            "error": "[ERROR]",
+            "debug": "[CONFIG]"
         }
 
         icon = level_icons.get(level, "ℹ️")

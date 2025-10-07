@@ -1,0 +1,102 @@
+{
+  "quest_id": "ganymede_tutorial",
+  "name": "Tutoriel de Ganymède",
+  "category": "tutorial",
+  "level_requirement": 1,
+  "description": "Découvrez les bases de DOFUS en parcourant Ganymède",
+  "objectives": [
+    {
+      "objective_id": "talk_to_guide",
+      "type": "dialogue",
+      "description": "Parler au Guide du Tutoriel",
+      "npc": "Guide Tutoriel",
+      "location": {
+        "map": "ganymede_center",
+        "position": [420, 320]
+      },
+      "completion_criteria": {
+        "dialogue_completed": true
+      },
+      "rewards": {
+        "xp": 100,
+        "kamas": 50
+      }
+    },
+    {
+      "objective_id": "kill_bouftous",
+      "type": "combat",
+      "description": "Vaincre 5 Bouftous",
+      "target": "Bouftou",
+      "count": 5,
+      "location": {
+        "map": "ganymede_west",
+        "position": [-600, 250]
+      },
+      "completion_criteria": {
+        "kills": 5,
+        "monster_type": "bouftou"
+      },
+      "rewards": {
+        "xp": 250,
+        "items": ["Poil de Bouftou"]
+      }
+    },
+    {
+      "objective_id": "gather_wheat",
+      "type": "gathering",
+      "description": "Récolter 3 Blés",
+      "target": "Blé",
+      "count": 3,
+      "profession": "Paysan",
+      "location": {
+        "map": "ganymede_west",
+        "position": [-450, 300]
+      },
+      "completion_criteria": {
+        "items_gathered": 3,
+        "item_type": "wheat"
+      },
+      "rewards": {
+        "xp": 150,
+        "profession_xp": {"Paysan": 50}
+      }
+    },
+    {
+      "objective_id": "return_to_guide",
+      "type": "dialogue",
+      "description": "Retourner voir le Guide du Tutoriel",
+      "npc": "Guide Tutoriel",
+      "location": {
+        "map": "ganymede_center",
+        "position": [420, 320]
+      },
+      "completion_criteria": {
+        "dialogue_completed": true
+      },
+      "rewards": {
+        "xp": 200,
+        "kamas": 100,
+        "items": ["Potion de Vie Mineure"]
+      }
+    }
+  ],
+  "sequential": true,
+  "repeatable": false,
+  "time_limit": null,
+  "prerequisites": [],
+  "rewards": {
+    "total_xp": 700,
+    "total_kamas": 150,
+    "items": ["Potion de Vie Mineure", "Poil de Bouftou"],
+    "title": "Novice de Ganymède"
+  },
+  "navigation_hints": {
+    "optimal_path": [
+      "ganymede_center",
+      "ganymede_west",
+      "ganymede_center"
+    ],
+    "estimated_duration": 600,
+    "difficulty": "very_easy"
+  }
+}

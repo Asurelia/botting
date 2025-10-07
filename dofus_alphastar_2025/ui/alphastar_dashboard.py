@@ -176,16 +176,16 @@ class AlphaStarDashboard:
         toolbar.pack(fill=tk.X, padx=5, pady=2)
 
         # Boutons principaux
-        ttk.Button(toolbar, text="▶ Start", style="Accent.TButton",
+        ttk.Button(toolbar, text="> Start", style="Accent.TButton",
                   command=self.start_training).pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="⏸ Pause", command=self.toggle_training).pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="⏹ Stop", command=self.stop_training).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, text="|| Pause", command=self.toggle_training).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, text="[] Stop", command=self.stop_training).pack(side=tk.LEFT, padx=2)
 
         ttk.Separator(toolbar, orient=tk.VERTICAL).pack(side=tk.LEFT, padx=10, fill=tk.Y)
 
         # Contrôles league
-        ttk.Button(toolbar, text="🏆 New League", command=self.create_league).pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="🎯 Manual Match", command=self.create_manual_match).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, text=" New League", command=self.create_league).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, text="[TARGET] Manual Match", command=self.create_manual_match).pack(side=tk.LEFT, padx=2)
 
         ttk.Separator(toolbar, orient=tk.VERTICAL).pack(side=tk.LEFT, padx=10, fill=tk.Y)
 
@@ -205,7 +205,7 @@ class AlphaStarDashboard:
 
         # === ONGLET TRAINING ===
         training_frame = ttk.Frame(control_notebook, style="Dark.TFrame")
-        control_notebook.add(training_frame, text="🚀 Training")
+        control_notebook.add(training_frame, text="[START] Training")
 
         # Status training
         status_group = ttk.LabelFrame(training_frame, text="Training Status", style="Dark.TFrame")
@@ -237,7 +237,7 @@ class AlphaStarDashboard:
 
         # === ONGLET LEAGUE ===
         league_frame = ttk.Frame(control_notebook, style="Dark.TFrame")
-        control_notebook.add(league_frame, text="🏆 League")
+        control_notebook.add(league_frame, text=" League")
 
         # Status league
         league_status_group = ttk.LabelFrame(league_frame, text="League Status", style="Dark.TFrame")
@@ -254,7 +254,7 @@ class AlphaStarDashboard:
 
         # === ONGLET SYSTEM ===
         system_frame = ttk.Frame(control_notebook, style="Dark.TFrame")
-        control_notebook.add(system_frame, text="💻 System")
+        control_notebook.add(system_frame, text=" System")
 
         # Métriques système
         system_group = ttk.LabelFrame(system_frame, text="Performance", style="Dark.TFrame")
@@ -290,7 +290,7 @@ class AlphaStarDashboard:
     def setup_training_charts(self):
         """Configure les graphiques d'entraînement"""
         training_chart_frame = ttk.Frame(self.charts_notebook, style="Dark.TFrame")
-        self.charts_notebook.add(training_chart_frame, text="📈 Training")
+        self.charts_notebook.add(training_chart_frame, text="[CHART] Training")
 
         # Figure matplotlib
         self.training_fig, ((self.ax_reward, self.ax_steps),
@@ -318,7 +318,7 @@ class AlphaStarDashboard:
     def setup_league_charts(self):
         """Configure les graphiques de league"""
         league_chart_frame = ttk.Frame(self.charts_notebook, style="Dark.TFrame")
-        self.charts_notebook.add(league_chart_frame, text="🏆 League")
+        self.charts_notebook.add(league_chart_frame, text=" League")
 
         # Figure league
         self.league_fig, ((self.ax_elo, self.ax_diversity),
@@ -344,7 +344,7 @@ class AlphaStarDashboard:
     def setup_performance_charts(self):
         """Configure les graphiques de performance"""
         perf_chart_frame = ttk.Frame(self.charts_notebook, style="Dark.TFrame")
-        self.charts_notebook.add(perf_chart_frame, text="💻 Performance")
+        self.charts_notebook.add(perf_chart_frame, text=" Performance")
 
         self.perf_fig, ((self.ax_memory, self.ax_gpu),
                         (self.ax_timing, self.ax_throughput)) = plt.subplots(2, 2, figsize=(12, 8))
@@ -371,7 +371,7 @@ class AlphaStarDashboard:
         self.main_paned.add(league_panel, weight=1)
 
         # === AGENT RANKING ===
-        ranking_group = ttk.LabelFrame(league_panel, text="🏆 Agent Ranking", style="Dark.TFrame")
+        ranking_group = ttk.LabelFrame(league_panel, text=" Agent Ranking", style="Dark.TFrame")
         ranking_group.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         # Treeview pour le ranking
@@ -389,7 +389,7 @@ class AlphaStarDashboard:
         scrollbar_ranking.pack(side=tk.RIGHT, fill=tk.Y)
 
         # === MATCH HISTORY ===
-        history_group = ttk.LabelFrame(league_panel, text="📊 Recent Matches", style="Dark.TFrame")
+        history_group = ttk.LabelFrame(league_panel, text="[STATS] Recent Matches", style="Dark.TFrame")
         history_group.pack(fill=tk.X, padx=5, pady=5)
 
         # Liste des matchs récents
