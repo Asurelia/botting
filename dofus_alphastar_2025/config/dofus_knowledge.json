@@ -1,0 +1,2576 @@
+{
+  "version": "1.0",
+  "calibration_date": "2025-09-30T18:22:53.053445",
+  "dofus_version": "2.71",
+  "window": {
+    "title": "DOFUS AlphaStar 2025 - Dashboard",
+    "x": 52,
+    "y": 52,
+    "width": 1216,
+    "height": 839,
+    "is_fullscreen": false
+  },
+  "ui_elements": [
+    {
+      "name": "hp_bar",
+      "x": 20,
+      "y": 20,
+      "width": 200,
+      "height": 30,
+      "confidence": 0.9,
+      "template_path": null
+    },
+    {
+      "name": "pa_bar",
+      "x": 20,
+      "y": 60,
+      "width": 150,
+      "height": 25,
+      "confidence": 0.9,
+      "template_path": null
+    },
+    {
+      "name": "pm_bar",
+      "x": 20,
+      "y": 95,
+      "width": 150,
+      "height": 25,
+      "confidence": 0.9,
+      "template_path": null
+    },
+    {
+      "name": "spell_bar",
+      "x": 710,
+      "y": 1000,
+      "width": 500,
+      "height": 60,
+      "confidence": 0.85,
+      "template_path": null
+    },
+    {
+      "name": "minimap",
+      "x": 1700,
+      "y": 20,
+      "width": 200,
+      "height": 200,
+      "confidence": 0.9,
+      "template_path": null
+    },
+    {
+      "name": "chat",
+      "x": 1500,
+      "y": 860,
+      "width": 400,
+      "height": 200,
+      "confidence": 0.8,
+      "template_path": null
+    },
+    {
+      "name": "inventory_button",
+      "x": 10,
+      "y": 150,
+      "width": 40,
+      "height": 40,
+      "confidence": 0.7,
+      "template_path": null
+    },
+    {
+      "name": "character_button",
+      "x": 10,
+      "y": 200,
+      "width": 40,
+      "height": 40,
+      "confidence": 0.7,
+      "template_path": null
+    },
+    {
+      "name": "spell_book_button",
+      "x": 10,
+      "y": 250,
+      "width": 40,
+      "height": 40,
+      "confidence": 0.7,
+      "template_path": null
+    },
+    {
+      "name": "quest_button",
+      "x": 10,
+      "y": 300,
+      "width": 40,
+      "height": 40,
+      "confidence": 0.7,
+      "template_path": null
+    },
+    {
+      "name": "map_button",
+      "x": 10,
+      "y": 350,
+      "width": 40,
+      "height": 40,
+      "confidence": 0.7,
+      "template_path": null
+    }
+  ],
+  "shortcuts": [
+    {
+      "action": "inventory",
+      "key": "I",
+      "verified": true,
+      "detection_method": "screen_diff"
+    }
+  ],
+  "interactive_elements": [
+    {
+      "element_type": "npc",
+      "x": 1007,
+      "y": 1057,
+      "bbox": [
+        995,
+        1049,
+        1019,
+        1066
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1311,
+      "y": 1017,
+      "bbox": [
+        1278,
+        1014,
+        1344,
+        1021
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1197,
+      "y": 909,
+      "bbox": [
+        1177,
+        904,
+        1217,
+        915
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 998,
+      "y": 901,
+      "bbox": [
+        988,
+        894,
+        1008,
+        908
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1042,
+      "y": 906,
+      "bbox": [
+        1027,
+        891,
+        1057,
+        922
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 441,
+      "y": 898,
+      "bbox": [
+        430,
+        891,
+        453,
+        905
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1240,
+      "y": 896,
+      "bbox": [
+        1207,
+        888,
+        1273,
+        904
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1140,
+      "y": 905,
+      "bbox": [
+        1093,
+        888,
+        1188,
+        922
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1075,
+      "y": 903,
+      "bbox": [
+        1057,
+        885,
+        1094,
+        922
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 977,
+      "y": 898,
+      "bbox": [
+        962,
+        885,
+        993,
+        911
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1275,
+      "y": 889,
+      "bbox": [
+        1244,
+        878,
+        1306,
+        900
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 874,
+      "y": 879,
+      "bbox": [
+        858,
+        872,
+        891,
+        887
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1089,
+      "y": 884,
+      "bbox": [
+        1076,
+        870,
+        1102,
+        898
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1121,
+      "y": 884,
+      "bbox": [
+        1099,
+        865,
+        1143,
+        903
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 936,
+      "y": 884,
+      "bbox": [
+        900,
+        864,
+        972,
+        904
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1199,
+      "y": 882,
+      "bbox": [
+        1160,
+        863,
+        1239,
+        902
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1033,
+      "y": 882,
+      "bbox": [
+        1011,
+        863,
+        1055,
+        901
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 681,
+      "y": 869,
+      "bbox": [
+        664,
+        863,
+        698,
+        876
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 442,
+      "y": 862,
+      "bbox": [
+        427,
+        851,
+        457,
+        873
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1175,
+      "y": 862,
+      "bbox": [
+        1160,
+        849,
+        1191,
+        876
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 961,
+      "y": 863,
+      "bbox": [
+        940,
+        847,
+        983,
+        880
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1238,
+      "y": 863,
+      "bbox": [
+        1202,
+        844,
+        1275,
+        882
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 739,
+      "y": 857,
+      "bbox": [
+        722,
+        843,
+        757,
+        871
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 891,
+      "y": 861,
+      "bbox": [
+        854,
+        841,
+        929,
+        881
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 798,
+      "y": 856,
+      "bbox": [
+        781,
+        841,
+        816,
+        871
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 741,
+      "y": 844,
+      "bbox": [
+        726,
+        836,
+        756,
+        853
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 956,
+      "y": 843,
+      "bbox": [
+        944,
+        835,
+        968,
+        852
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1126,
+      "y": 843,
+      "bbox": [
+        1112,
+        833,
+        1141,
+        853
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 913,
+      "y": 843,
+      "bbox": [
+        898,
+        832,
+        929,
+        855
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 789,
+      "y": 843,
+      "bbox": [
+        776,
+        832,
+        802,
+        854
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 699,
+      "y": 840,
+      "bbox": [
+        688,
+        829,
+        711,
+        852
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 582,
+      "y": 843,
+      "bbox": [
+        558,
+        829,
+        606,
+        858
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 513,
+      "y": 842,
+      "bbox": [
+        492,
+        827,
+        534,
+        858
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1188,
+      "y": 834,
+      "bbox": [
+        1172,
+        819,
+        1205,
+        850
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 943,
+      "y": 833,
+      "bbox": [
+        936,
+        819,
+        950,
+        847
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 901,
+      "y": 827,
+      "bbox": [
+        891,
+        819,
+        912,
+        836
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 524,
+      "y": 818,
+      "bbox": [
+        512,
+        807,
+        536,
+        829
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 914,
+      "y": 812,
+      "bbox": [
+        894,
+        800,
+        934,
+        824
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1060,
+      "y": 811,
+      "bbox": [
+        1050,
+        798,
+        1071,
+        825
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 556,
+      "y": 817,
+      "bbox": [
+        535,
+        798,
+        577,
+        836
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 469,
+      "y": 809,
+      "bbox": [
+        455,
+        798,
+        484,
+        821
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 728,
+      "y": 807,
+      "bbox": [
+        707,
+        797,
+        749,
+        817
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1095,
+      "y": 798,
+      "bbox": [
+        1082,
+        789,
+        1109,
+        807
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 947,
+      "y": 803,
+      "bbox": [
+        918,
+        781,
+        977,
+        825
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 600,
+      "y": 792,
+      "bbox": [
+        579,
+        781,
+        622,
+        803
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 777,
+      "y": 785,
+      "bbox": [
+        761,
+        778,
+        794,
+        792
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 417,
+      "y": 795,
+      "bbox": [
+        387,
+        777,
+        448,
+        814
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1008,
+      "y": 795,
+      "bbox": [
+        976,
+        776,
+        1041,
+        814
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1082,
+      "y": 782,
+      "bbox": [
+        1071,
+        773,
+        1093,
+        791
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 993,
+      "y": 780,
+      "bbox": [
+        981,
+        768,
+        1005,
+        793
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 909,
+      "y": 777,
+      "bbox": [
+        899,
+        767,
+        919,
+        788
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 351,
+      "y": 778,
+      "bbox": [
+        337,
+        762,
+        365,
+        794
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 874,
+      "y": 775,
+      "bbox": [
+        854,
+        761,
+        894,
+        790
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 636,
+      "y": 773,
+      "bbox": [
+        612,
+        758,
+        660,
+        788
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 725,
+      "y": 770,
+      "bbox": [
+        709,
+        755,
+        742,
+        786
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 991,
+      "y": 764,
+      "bbox": [
+        977,
+        754,
+        1006,
+        775
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 788,
+      "y": 773,
+      "bbox": [
+        768,
+        754,
+        808,
+        792
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 695,
+      "y": 758,
+      "bbox": [
+        682,
+        752,
+        708,
+        765
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1027,
+      "y": 758,
+      "bbox": [
+        1013,
+        743,
+        1042,
+        774
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 998,
+      "y": 752,
+      "bbox": [
+        984,
+        741,
+        1012,
+        764
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 426,
+      "y": 756,
+      "bbox": [
+        395,
+        740,
+        457,
+        773
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 772,
+      "y": 755,
+      "bbox": [
+        745,
+        738,
+        800,
+        773
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1041,
+      "y": 747,
+      "bbox": [
+        1024,
+        735,
+        1058,
+        759
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 657,
+      "y": 750,
+      "bbox": [
+        638,
+        735,
+        676,
+        765
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 851,
+      "y": 752,
+      "bbox": [
+        819,
+        734,
+        884,
+        771
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 931,
+      "y": 744,
+      "bbox": [
+        904,
+        732,
+        959,
+        757
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 653,
+      "y": 738,
+      "bbox": [
+        635,
+        724,
+        672,
+        752
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 895,
+      "y": 735,
+      "bbox": [
+        859,
+        718,
+        931,
+        752
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 972,
+      "y": 734,
+      "bbox": [
+        940,
+        717,
+        1004,
+        752
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 807,
+      "y": 734,
+      "bbox": [
+        774,
+        716,
+        840,
+        752
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 181,
+      "y": 727,
+      "bbox": [
+        166,
+        716,
+        197,
+        738
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 357,
+      "y": 734,
+      "bbox": [
+        333,
+        711,
+        382,
+        757
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 932,
+      "y": 719,
+      "bbox": [
+        911,
+        708,
+        954,
+        730
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1567,
+      "y": 663,
+      "bbox": [
+        1553,
+        656,
+        1581,
+        671
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 475,
+      "y": 653,
+      "bbox": [
+        459,
+        646,
+        492,
+        660
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 261,
+      "y": 651,
+      "bbox": [
+        253,
+        644,
+        270,
+        659
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1523,
+      "y": 641,
+      "bbox": [
+        1508,
+        634,
+        1539,
+        648
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 557,
+      "y": 634,
+      "bbox": [
+        540,
+        626,
+        574,
+        642
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 498,
+      "y": 632,
+      "bbox": [
+        489,
+        626,
+        508,
+        638
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1557,
+      "y": 623,
+      "bbox": [
+        1527,
+        603,
+        1587,
+        643
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1526,
+      "y": 597,
+      "bbox": [
+        1514,
+        588,
+        1538,
+        607
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 662,
+      "y": 595,
+      "bbox": [
+        649,
+        588,
+        675,
+        603
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1604,
+      "y": 620,
+      "bbox": [
+        1553,
+        580,
+        1655,
+        660
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1564,
+      "y": 585,
+      "bbox": [
+        1552,
+        573,
+        1577,
+        597
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 589,
+      "y": 576,
+      "bbox": [
+        555,
+        566,
+        623,
+        587
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 669,
+      "y": 582,
+      "bbox": [
+        642,
+        564,
+        697,
+        600
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 546,
+      "y": 566,
+      "bbox": [
+        527,
+        554,
+        565,
+        579
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 664,
+      "y": 557,
+      "bbox": [
+        655,
+        548,
+        674,
+        566
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 869,
+      "y": 554,
+      "bbox": [
+        856,
+        546,
+        882,
+        563
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 628,
+      "y": 557,
+      "bbox": [
+        601,
+        538,
+        655,
+        577
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 812,
+      "y": 551,
+      "bbox": [
+        776,
+        537,
+        849,
+        566
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 583,
+      "y": 535,
+      "bbox": [
+        571,
+        528,
+        595,
+        542
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 937,
+      "y": 544,
+      "bbox": [
+        898,
+        520,
+        976,
+        568
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 845,
+      "y": 537,
+      "bbox": [
+        814,
+        518,
+        877,
+        556
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 607,
+      "y": 527,
+      "bbox": [
+        582,
+        516,
+        633,
+        538
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 828,
+      "y": 512,
+      "bbox": [
+        807,
+        502,
+        850,
+        522
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 561,
+      "y": 508,
+      "bbox": [
+        547,
+        497,
+        575,
+        519
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 841,
+      "y": 504,
+      "bbox": [
+        826,
+        494,
+        856,
+        514
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 626,
+      "y": 514,
+      "bbox": [
+        593,
+        494,
+        659,
+        535
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1884,
+      "y": 495,
+      "bbox": [
+        1863,
+        485,
+        1905,
+        506
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1851,
+      "y": 487,
+      "bbox": [
+        1843,
+        478,
+        1860,
+        497
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 595,
+      "y": 492,
+      "bbox": [
+        559,
+        472,
+        632,
+        513
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 624,
+      "y": 476,
+      "bbox": [
+        593,
+        461,
+        655,
+        492
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1845,
+      "y": 468,
+      "bbox": [
+        1830,
+        458,
+        1860,
+        478
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 546,
+      "y": 471,
+      "bbox": [
+        529,
+        450,
+        564,
+        492
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 759,
+      "y": 476,
+      "bbox": [
+        726,
+        445,
+        792,
+        508
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1846,
+      "y": 445,
+      "bbox": [
+        1835,
+        434,
+        1857,
+        457
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 589,
+      "y": 442,
+      "bbox": [
+        571,
+        433,
+        607,
+        451
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1751,
+      "y": 447,
+      "bbox": [
+        1724,
+        432,
+        1778,
+        463
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1103,
+      "y": 462,
+      "bbox": [
+        942,
+        432,
+        1265,
+        493
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 426,
+      "y": 433,
+      "bbox": [
+        409,
+        424,
+        443,
+        442
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1797,
+      "y": 432,
+      "bbox": [
+        1773,
+        421,
+        1822,
+        444
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 560,
+      "y": 432,
+      "bbox": [
+        539,
+        415,
+        582,
+        449
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 634,
+      "y": 429,
+      "bbox": [
+        615,
+        413,
+        653,
+        445
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 813,
+      "y": 428,
+      "bbox": [
+        794,
+        407,
+        832,
+        449
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 538,
+      "y": 419,
+      "bbox": [
+        519,
+        407,
+        557,
+        431
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 588,
+      "y": 414,
+      "bbox": [
+        577,
+        406,
+        600,
+        422
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1676,
+      "y": 424,
+      "bbox": [
+        1642,
+        401,
+        1711,
+        448
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 488,
+      "y": 407,
+      "bbox": [
+        477,
+        395,
+        500,
+        420
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1765,
+      "y": 414,
+      "bbox": [
+        1715,
+        390,
+        1816,
+        439
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1847,
+      "y": 411,
+      "bbox": [
+        1826,
+        389,
+        1868,
+        434
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 557,
+      "y": 391,
+      "bbox": [
+        542,
+        378,
+        572,
+        404
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 517,
+      "y": 400,
+      "bbox": [
+        492,
+        376,
+        542,
+        424
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1897,
+      "y": 389,
+      "bbox": [
+        1881,
+        374,
+        1914,
+        405
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 809,
+      "y": 379,
+      "bbox": [
+        783,
+        366,
+        836,
+        392
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 899,
+      "y": 405,
+      "bbox": [
+        860,
+        354,
+        938,
+        456
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 882,
+      "y": 375,
+      "bbox": [
+        870,
+        351,
+        894,
+        399
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1819,
+      "y": 359,
+      "bbox": [
+        1757,
+        328,
+        1882,
+        390
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1811,
+      "y": 323,
+      "bbox": [
+        1787,
+        310,
+        1835,
+        337
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1370,
+      "y": 317,
+      "bbox": [
+        1346,
+        303,
+        1395,
+        332
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 830,
+      "y": 253,
+      "bbox": [
+        815,
+        245,
+        845,
+        261
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1254,
+      "y": 209,
+      "bbox": [
+        1240,
+        200,
+        1269,
+        218
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1423,
+      "y": 180,
+      "bbox": [
+        1412,
+        175,
+        1435,
+        186
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1251,
+      "y": 172,
+      "bbox": [
+        1238,
+        162,
+        1264,
+        182
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1101,
+      "y": 166,
+      "bbox": [
+        1067,
+        146,
+        1136,
+        187
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1638,
+      "y": 123,
+      "bbox": [
+        1621,
+        113,
+        1655,
+        134
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1389,
+      "y": 103,
+      "bbox": [
+        1374,
+        97,
+        1405,
+        110
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1584,
+      "y": 128,
+      "bbox": [
+        1540,
+        89,
+        1629,
+        168
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1403,
+      "y": 89,
+      "bbox": [
+        1391,
+        79,
+        1416,
+        99
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1628,
+      "y": 69,
+      "bbox": [
+        1609,
+        54,
+        1647,
+        84
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 136,
+      "y": 40,
+      "bbox": [
+        128,
+        33,
+        145,
+        47
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1649,
+      "y": 70,
+      "bbox": [
+        1602,
+        29,
+        1696,
+        111
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    },
+    {
+      "element_type": "npc",
+      "x": 1682,
+      "y": 33,
+      "bbox": [
+        1657,
+        23,
+        1707,
+        44
+      ],
+      "color_signature": [
+        0,
+        200,
+        200
+      ],
+      "template_id": null
+    }
+  ],
+  "game_options": {
+    "interface": {
+      "highlight_interactive": true,
+      "show_names": true,
+      "show_hp_bars": true
+    },
+    "combat": {
+      "auto_pass_turn": false,
+      "show_damage": true
+    },
+    "general": {
+      "language": "fr",
+      "resolution": "1216x839"
+    }
+  },
+  "statistics": {
+    "ui_elements_found": 11,
+    "shortcuts_found": 1,
+    "interactive_elements_found": 143,
+    "duration_seconds": 23.983922481536865
+  }
+}

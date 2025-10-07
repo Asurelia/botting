@@ -1,0 +1,388 @@
+{
+  "world_id": "ganymede",
+  "name": "Ganymède",
+  "description": "Île tutorielle idéale pour les aventuriers débutants",
+  "level_range": [1, 30],
+  "regions": [
+    {
+      "region_id": "ganymede_center",
+      "region_type": "village",
+      "bounds": [0, 0, 800, 600],
+      "center": [400, 300],
+      "name": "Centre de Ganymède",
+      "level_range": [1, 10],
+      "danger_level": 1,
+      "connections": ["ganymede_east", "ganymede_west", "ganymede_north", "ganymede_south"],
+      "properties": {
+        "safe_zone": true,
+        "respawn_point": true,
+        "has_merchants": true
+      },
+      "elements": [
+        {
+          "element_id": "zaap_center",
+          "element_type": "zaap",
+          "position": [400, 300],
+          "name": "Zaap de Ganymède",
+          "level_range": [1, 1],
+          "properties": {
+            "teleport_cost": 10,
+            "connections": ["astrub", "brakmar", "bonta"]
+          }
+        },
+        {
+          "element_id": "bank_center",
+          "element_type": "bank",
+          "position": [350, 280],
+          "name": "Banque de Ganymède",
+          "level_range": [1, 1],
+          "properties": {
+            "storage_slots": 100,
+            "free_access": true
+          }
+        },
+        {
+          "element_id": "market_center",
+          "element_type": "market",
+          "position": [380, 290],
+          "name": "Hôtel de Ventes",
+          "level_range": [1, 1],
+          "properties": {
+            "tax_rate": 0.02,
+            "max_auctions": 5
+          }
+        },
+        {
+          "element_id": "npc_tutorial",
+          "element_type": "npc",
+          "position": [420, 320],
+          "name": "Guide Tutoriel",
+          "level_range": [1, 1],
+          "properties": {
+            "quest_giver": true,
+            "quests": ["ganymede_tutorial"],
+            "dialogue": "Bienvenue à Ganymède, jeune aventurier !"
+          }
+        },
+        {
+          "element_id": "npc_innkeeper",
+          "element_type": "npc",
+          "position": [360, 310],
+          "name": "Aubergiste",
+          "level_range": [1, 1],
+          "properties": {
+            "merchant": true,
+            "sells": ["Potion de Vie", "Pain"],
+            "phoenix_egg": true
+          }
+        }
+      ]
+    },
+    {
+      "region_id": "ganymede_east",
+      "region_type": "forest",
+      "bounds": [800, 0, 1600, 600],
+      "center": [1200, 300],
+      "name": "Forêt de Ganymède",
+      "level_range": [10, 25],
+      "danger_level": 3,
+      "connections": ["ganymede_center"],
+      "properties": {
+        "safe_zone": false,
+        "farming_spot": true,
+        "resources": ["wood"]
+      },
+      "elements": [
+        {
+          "element_id": "monster_sanglier_1",
+          "element_type": "monster",
+          "position": [900, 200],
+          "name": "Sanglier",
+          "level_range": [12, 15],
+          "properties": {
+            "monster_type": "sanglier",
+            "respawn_time": 180,
+            "group_size": [1, 2],
+            "aggro_range": 4
+          }
+        },
+        {
+          "element_id": "monster_sanglier_2",
+          "element_type": "monster",
+          "position": [950, 250],
+          "name": "Sanglier",
+          "level_range": [13, 16],
+          "properties": {
+            "monster_type": "sanglier",
+            "respawn_time": 180,
+            "group_size": [1, 3],
+            "aggro_range": 4
+          }
+        },
+        {
+          "element_id": "monster_moskito_1",
+          "element_type": "monster",
+          "position": [1100, 350],
+          "name": "Moskito",
+          "level_range": [15, 18],
+          "properties": {
+            "monster_type": "moskito",
+            "respawn_time": 150,
+            "group_size": [1, 2],
+            "aggro_range": 5
+          }
+        },
+        {
+          "element_id": "monster_moskito_2",
+          "element_type": "monster",
+          "position": [1150, 400],
+          "name": "Moskito",
+          "level_range": [16, 19],
+          "properties": {
+            "monster_type": "moskito",
+            "respawn_time": 150,
+            "group_size": [2, 3],
+            "aggro_range": 5
+          }
+        },
+        {
+          "element_id": "resource_tree_1",
+          "element_type": "resource",
+          "position": [1000, 400],
+          "name": "Frêne",
+          "level_range": [1, 1],
+          "properties": {
+            "resource_type": "wood",
+            "profession": "Bûcheron",
+            "respawn_time": 300,
+            "harvest_time": 5,
+            "yields": ["Bois de Frêne"]
+          }
+        },
+        {
+          "element_id": "resource_tree_2",
+          "element_type": "resource",
+          "position": [1050, 450],
+          "name": "Frêne",
+          "level_range": [1, 1],
+          "properties": {
+            "resource_type": "wood",
+            "profession": "Bûcheron",
+            "respawn_time": 300,
+            "harvest_time": 5,
+            "yields": ["Bois de Frêne"]
+          }
+        },
+        {
+          "element_id": "npc_lumberjack",
+          "element_type": "npc",
+          "position": [1200, 300],
+          "name": "Bûcheron",
+          "level_range": [1, 1],
+          "properties": {
+            "profession_trainer": "Bûcheron",
+            "teaches_recipes": ["Planche de Frêne"],
+            "dialogue": "Ces arbres regorgent de bois de qualité !"
+          }
+        }
+      ]
+    },
+    {
+      "region_id": "ganymede_west",
+      "region_type": "plains",
+      "bounds": [-800, 0, 0, 600],
+      "center": [-400, 300],
+      "name": "Plaines de Ganymède",
+      "level_range": [5, 18],
+      "danger_level": 2,
+      "connections": ["ganymede_center"],
+      "properties": {
+        "safe_zone": false,
+        "farming_spot": true,
+        "resources": ["cereal"]
+      },
+      "elements": [
+        {
+          "element_id": "monster_bouftou_1",
+          "element_type": "monster",
+          "position": [-600, 250],
+          "name": "Bouftou",
+          "level_range": [8, 12],
+          "properties": {
+            "monster_type": "bouftou",
+            "respawn_time": 120,
+            "group_size": [1, 2],
+            "aggro_range": 3
+          }
+        },
+        {
+          "element_id": "monster_bouftou_2",
+          "element_type": "monster",
+          "position": [-550, 300],
+          "name": "Bouftou",
+          "level_range": [9, 13],
+          "properties": {
+            "monster_type": "bouftou",
+            "respawn_time": 120,
+            "group_size": [1, 3],
+            "aggro_range": 3
+          }
+        },
+        {
+          "element_id": "monster_pissenlit_1",
+          "element_type": "monster",
+          "position": [-500, 350],
+          "name": "Pissenlit Diabolique",
+          "level_range": [10, 14],
+          "properties": {
+            "monster_type": "pissenlit",
+            "respawn_time": 100,
+            "group_size": [1, 2],
+            "aggro_range": 2
+          }
+        },
+        {
+          "element_id": "resource_wheat_1",
+          "element_type": "resource",
+          "position": [-450, 300],
+          "name": "Blé",
+          "level_range": [1, 1],
+          "properties": {
+            "resource_type": "cereal",
+            "profession": "Paysan",
+            "respawn_time": 240,
+            "harvest_time": 4,
+            "yields": ["Blé"]
+          }
+        },
+        {
+          "element_id": "resource_wheat_2",
+          "element_type": "resource",
+          "position": [-400, 350],
+          "name": "Blé",
+          "level_range": [1, 1],
+          "properties": {
+            "resource_type": "cereal",
+            "profession": "Paysan",
+            "respawn_time": 240,
+            "harvest_time": 4,
+            "yields": ["Blé"]
+          }
+        },
+        {
+          "element_id": "npc_farmer",
+          "element_type": "npc",
+          "position": [-400, 300],
+          "name": "Fermier",
+          "level_range": [1, 1],
+          "properties": {
+            "profession_trainer": "Paysan",
+            "teaches_recipes": ["Pain", "Farine"],
+            "dialogue": "Les champs sont fertiles ici !"
+          }
+        }
+      ]
+    },
+    {
+      "region_id": "ganymede_north",
+      "region_type": "mountains",
+      "bounds": [0, -600, 800, 0],
+      "center": [400, -300],
+      "name": "Montagnes de Ganymède",
+      "level_range": [15, 30],
+      "danger_level": 4,
+      "connections": ["ganymede_center"],
+      "properties": {
+        "safe_zone": false,
+        "farming_spot": true,
+        "resources": ["ore"]
+      },
+      "elements": [
+        {
+          "element_id": "monster_wolf_1",
+          "element_type": "monster",
+          "position": [300, -400],
+          "name": "Loup",
+          "level_range": [20, 25],
+          "properties": {
+            "monster_type": "loup",
+            "respawn_time": 240,
+            "group_size": [2, 4],
+            "aggro_range": 5
+          }
+        },
+        {
+          "element_id": "resource_iron_1",
+          "element_type": "resource",
+          "position": [400, -350],
+          "name": "Fer",
+          "level_range": [1, 1],
+          "properties": {
+            "resource_type": "ore",
+            "profession": "Mineur",
+            "respawn_time": 360,
+            "harvest_time": 6,
+            "yields": ["Minerai de Fer"]
+          }
+        },
+        {
+          "element_id": "npc_miner",
+          "element_type": "npc",
+          "position": [450, -300],
+          "name": "Mineur",
+          "level_range": [1, 1],
+          "properties": {
+            "profession_trainer": "Mineur",
+            "teaches_recipes": ["Barre de Fer"],
+            "dialogue": "Les montagnes cachent de précieux minerais !"
+          }
+        }
+      ]
+    },
+    {
+      "region_id": "ganymede_south",
+      "region_type": "plains",
+      "bounds": [0, 600, 800, 1200],
+      "center": [400, 900],
+      "name": "Plaines du Sud",
+      "level_range": [5, 15],
+      "danger_level": 2,
+      "connections": ["ganymede_center"],
+      "properties": {
+        "safe_zone": false,
+        "farming_spot": true
+      },
+      "elements": [
+        {
+          "element_id": "monster_tofu_1",
+          "element_type": "monster",
+          "position": [300, 850],
+          "name": "Tofu",
+          "level_range": [5, 8],
+          "properties": {
+            "monster_type": "tofu",
+            "respawn_time": 90,
+            "group_size": [1, 3],
+            "aggro_range": 3
+          }
+        }
+      ]
+    }
+  ],
+  "connections": {
+    "ganymede_center": ["ganymede_east", "ganymede_west", "ganymede_north", "ganymede_south"],
+    "ganymede_east": ["ganymede_center"],
+    "ganymede_west": ["ganymede_center"],
+    "ganymede_north": ["ganymede_center"],
+    "ganymede_south": ["ganymede_center"]
+  },
+  "metadata": {
+    "created_at": "2025-01-30",
+    "version": "1.0.0",
+    "total_monsters": 12,
+    "total_resources": 6,
+    "total_npcs": 6,
+    "recommended_for_bot": true,
+    "farming_efficiency": "high"
+  }
+}

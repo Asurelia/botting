@@ -72,7 +72,7 @@ class ThemeCustomizer:
         # Titre
         title = self.theme.create_subtitle_label(
             self.frame,
-            text="🎨 Personnalisation Thème"
+            text=" Personnalisation Thème"
         )
         title.pack(pady=(15, 10))
 
@@ -118,21 +118,21 @@ class ThemeCustomizer:
 
         reset_btn = self.theme.create_secondary_button(
             buttons_frame,
-            text="🔄 Reset",
+            text="[RELOAD] Reset",
             command=self.reset_colors
         )
         reset_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         apply_btn = self.theme.create_primary_button(
             buttons_frame,
-            text="✓ Appliquer",
+            text="[OK] Appliquer",
             command=self.apply_custom_theme
         )
         apply_btn.pack(side=tk.LEFT)
 
         export_btn = self.theme.create_secondary_button(
             buttons_frame,
-            text="💾 Exporter",
+            text="[SAVE] Exporter",
             command=self.export_theme
         )
         export_btn.pack(side=tk.RIGHT)
@@ -243,7 +243,7 @@ class NotificationSettings:
         # Titre
         title = self.theme.create_subtitle_label(
             self.frame,
-            text="🔔 Notifications"
+            text=" Notifications"
         )
         title.pack(pady=(15, 10))
 
@@ -330,7 +330,7 @@ class NotificationSettings:
         # Test de notification
         test_btn = self.theme.create_secondary_button(
             types_frame,
-            text="🔔 Tester notification",
+            text=" Tester notification",
             command=self.test_notification
         )
         test_btn.pack(pady=10)
@@ -355,7 +355,7 @@ class AdvancedSettings:
         # Titre
         title = self.theme.create_subtitle_label(
             self.frame,
-            text="⚙️ Paramètres Avancés"
+            text="[SETTINGS] Paramètres Avancés"
         )
         title.pack(pady=(15, 10))
 
@@ -397,7 +397,7 @@ class AdvancedSettings:
         section = self.theme.create_panel(parent)
         section.pack(fill=tk.X, pady=(0, 20))
 
-        section_title = self.theme.create_subtitle_label(section, text="🚀 Performance")
+        section_title = self.theme.create_subtitle_label(section, text="[START] Performance")
         section_title.pack(pady=(15, 10))
 
         content = self.theme.create_frame(section, "primary")
@@ -465,7 +465,7 @@ class AdvancedSettings:
         section = self.theme.create_panel(parent)
         section.pack(fill=tk.X, pady=(0, 20))
 
-        section_title = self.theme.create_subtitle_label(section, text="🔒 Sécurité")
+        section_title = self.theme.create_subtitle_label(section, text=" Sécurité")
         section_title.pack(pady=(15, 10))
 
         content = self.theme.create_frame(section, "primary")
@@ -515,7 +515,7 @@ class AdvancedSettings:
         section = self.theme.create_panel(parent)
         section.pack(fill=tk.X, pady=(0, 20))
 
-        section_title = self.theme.create_subtitle_label(section, text="🔧 Debug")
+        section_title = self.theme.create_subtitle_label(section, text="[CONFIG] Debug")
         section_title.pack(pady=(15, 10))
 
         content = self.theme.create_frame(section, "primary")
@@ -571,7 +571,7 @@ class AdvancedSettings:
         section = self.theme.create_panel(parent)
         section.pack(fill=tk.X, pady=(0, 20))
 
-        section_title = self.theme.create_subtitle_label(section, text="🌐 Réseau")
+        section_title = self.theme.create_subtitle_label(section, text="[WEB] Réseau")
         section_title.pack(pady=(15, 10))
 
         content = self.theme.create_frame(section, "primary")
@@ -644,7 +644,7 @@ class ConfigPanel:
 
         title_label = self.theme.create_title_label(
             header_frame,
-            text="⚙️ Configuration Générale"
+            text="[SETTINGS] Configuration Générale"
         )
         title_label.pack(side=tk.LEFT)
 
@@ -654,28 +654,28 @@ class ConfigPanel:
 
         import_btn = self.theme.create_secondary_button(
             buttons_frame,
-            text="📁 Importer",
+            text=" Importer",
             command=self.import_settings
         )
         import_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         export_btn = self.theme.create_secondary_button(
             buttons_frame,
-            text="💾 Exporter",
+            text="[SAVE] Exporter",
             command=self.export_settings
         )
         export_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         reset_btn = self.theme.create_secondary_button(
             buttons_frame,
-            text="🔄 Reset",
+            text="[RELOAD] Reset",
             command=self.reset_settings
         )
         reset_btn.pack(side=tk.LEFT, padx=(0, 10))
 
         apply_btn = self.theme.create_primary_button(
             buttons_frame,
-            text="✓ Appliquer",
+            text="[OK] Appliquer",
             command=self.apply_settings
         )
         apply_btn.pack(side=tk.LEFT)
@@ -693,7 +693,7 @@ class ConfigPanel:
     def create_general_section(self):
         """Section générale"""
         general_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(general_frame, text="🏠 Général")
+        self.notebook.add(general_frame, text=" Général")
 
         # Language
         lang_frame = self.theme.create_frame(general_frame, "primary")
@@ -773,7 +773,7 @@ class ConfigPanel:
     def create_appearance_section(self):
         """Section apparence"""
         appearance_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(appearance_frame, text="🎨 Apparence")
+        self.notebook.add(appearance_frame, text=" Apparence")
 
         # Intégrer le personnalisateur de thèmes
         self.theme_customizer = ThemeCustomizer(appearance_frame, self.theme)
@@ -781,7 +781,7 @@ class ConfigPanel:
     def create_notifications_section(self):
         """Section notifications"""
         notifications_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(notifications_frame, text="🔔 Notifications")
+        self.notebook.add(notifications_frame, text=" Notifications")
 
         # Intégrer les paramètres de notifications
         self.notification_settings = NotificationSettings(notifications_frame, self.theme)
@@ -789,7 +789,7 @@ class ConfigPanel:
     def create_advanced_section(self):
         """Section avancée"""
         advanced_frame = self.theme.create_frame(self.notebook, "primary")
-        self.notebook.add(advanced_frame, text="⚙️ Avancé")
+        self.notebook.add(advanced_frame, text="[SETTINGS] Avancé")
 
         # Intégrer les paramètres avancés
         self.advanced_settings = AdvancedSettings(advanced_frame, self.theme)

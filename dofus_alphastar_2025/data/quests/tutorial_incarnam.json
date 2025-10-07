@@ -1,0 +1,76 @@
+{
+  "quest_id": "tutorial_incarnam_001",
+  "name": "Premiers Pas à Incarnam",
+  "description": "Apprenez les bases de DOFUS en explorant Incarnam",
+  "level_required": 1,
+  "level_max": 15,
+  "repeatable": false,
+  "category": "tutorial",
+  "rewards": {
+    "kamas": 500,
+    "xp": 1000,
+    "items": [
+      {"item_id": 10001, "name": "Pain", "quantity": 5}
+    ]
+  },
+  "objectives": [
+    {
+      "objective_id": "obj_001",
+      "type": "dialogue",
+      "description": "Parler à Otomaï",
+      "target_npc": "Otomaï",
+      "map_id": "incarnam_center",
+      "position": [300, 250],
+      "completed": false
+    },
+    {
+      "objective_id": "obj_002",
+      "type": "kill_monsters",
+      "description": "Tuer 5 Larves Bleues",
+      "monster_type": "Larve Bleue",
+      "quantity_required": 5,
+      "quantity_current": 0,
+      "map_hints": ["incarnam_east", "incarnam_forest"],
+      "completed": false
+    },
+    {
+      "objective_id": "obj_003",
+      "type": "gather",
+      "description": "Récolter 3 Blés",
+      "resource_type": "Blé",
+      "quantity_required": 3,
+      "quantity_current": 0,
+      "map_hints": ["incarnam_fields"],
+      "completed": false
+    },
+    {
+      "objective_id": "obj_004",
+      "type": "dialogue",
+      "description": "Retourner voir Otomaï",
+      "target_npc": "Otomaï",
+      "map_id": "incarnam_center",
+      "position": [300, 250],
+      "completed": false
+    }
+  ],
+  "navigation_hints": {
+    "start_map": "incarnam_center",
+    "quest_zones": [
+      {
+        "zone_id": "incarnam_center",
+        "npcs": ["Otomaï"],
+        "coordinates": [0, 0]
+      },
+      {
+        "zone_id": "incarnam_forest",
+        "monsters": ["Larve Bleue", "Moskito"],
+        "coordinates": [1, 0]
+      },
+      {
+        "zone_id": "incarnam_fields",
+        "resources": ["Blé", "Orge"],
+        "coordinates": [-1, 0]
+      }
+    ]
+  }
+}

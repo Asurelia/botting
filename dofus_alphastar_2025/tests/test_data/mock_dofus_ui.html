@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dofus Unity - Mock UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1410 0%, #2d2419 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        #game-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            margin: 20px auto;
+            background: #3d342a;
+            border: 3px solid #8b7355;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        /* ===== HP BAR ===== */
+        .hp-bar-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 200px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #ffd700;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .hp-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, #00ff00 0%, #90EE90 100%);
+            width: 75%; /* 75% HP */
+            transition: width 0.3s ease;
+        }
+
+        .hp-text {
+            position: absolute;
+            top: 10px;
+            left: 220px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* ===== MP BAR ===== */
+        .mp-bar-container {
+            position: absolute;
+            top: 35px;
+            left: 10px;
+            width: 200px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #ffd700;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .mp-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1e90ff 0%, #87CEEB 100%);
+            width: 60%; /* 60% MP */
+            transition: width 0.3s ease;
+        }
+
+        .mp-text {
+            position: absolute;
+            top: 35px;
+            left: 220px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* ===== STATS ===== */
+        .stats-container {
+            position: absolute;
+            top: 60px;
+            left: 10px;
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* ===== COMBAT GRID ===== */
+        .combat-grid {
+            position: absolute;
+            top: 150px;
+            left: 400px;
+            width: 600px;
+            height: 480px;
+            background: repeating-linear-gradient(
+                0deg,
+                #4a3f35 0px,
+                #4a3f35 60px,
+                #3d3429 60px,
+                #3d3429 61px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                #4a3f35 0px,
+                #4a3f35 60px,
+                #3d3429 60px,
+                #3d3429 61px
+            );
+        }
+
+        /* ===== MONSTER ===== */
+        .monster {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ff0000 0%, #8b0000 100%);
+            border: 3px solid #ffa500;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+        }
+
+        .monster:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .monster-1 {
+            top: 180px;
+            left: 300px;
+        }
+
+        .monster-2 {
+            top: 240px;
+            left: 360px;
+        }
+
+        .monster-3 {
+            top: 180px;
+            left: 420px;
+        }
+
+        /* ===== PLAYER ===== */
+        .player {
+            position: absolute;
+            top: 360px;
+            left: 120px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #00ff00 0%, #006400 100%);
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+        }
+
+        /* ===== RESOURCE ===== */
+        .resource {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .tree {
+            width: 60px;
+            height: 80px;
+        }
+
+        .tree-trunk {
+            width: 20px;
+            height: 30px;
+            background: #8b4513;
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            border-radius: 3px;
+        }
+
+        .tree-leaves {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #228b22 0%, #006400 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 5px;
+            box-shadow: 0 0 15px rgba(34, 139, 34, 0.4);
+        }
+
+        .resource-1 {
+            top: 400px;
+            left: 700px;
+        }
+
+        .resource-2 {
+            top: 450px;
+            left: 750px;
+        }
+
+        .ore {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #a9a9a9 0%, #696969 100%);
+            border: 2px solid #d3d3d3;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(169, 169, 169, 0.5);
+        }
+
+        .ore {
+            top: 300px;
+            left: 500px;
+        }
+
+        /* ===== MINI MAP ===== */
+        .minimap {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 150px;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+        }
+
+        .minimap-player {
+            position: absolute;
+            top: 75px;
+            left: 75px;
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* ===== INVENTORY BUTTON ===== */
+        .inventory-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #6b5b3c 0%, #4a3f2f 100%);
+            border: 3px solid #ffd700;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .inventory-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ===== INFO PANEL ===== */
+        .info-panel {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            padding: 10px;
+            color: #fff;
+            font-size: 12px;
+            max-width: 300px;
+        }
+
+        .info-title {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- HP Bar -->
+        <div class="hp-bar-container">
+            <div class="hp-bar-fill" id="hpBar"></div>
+        </div>
+        <div class="hp-text" id="hpText">HP: 750/1000</div>
+
+        <!-- MP Bar -->
+        <div class="mp-bar-container">
+            <div class="mp-bar-fill" id="mpBar"></div>
+        </div>
+        <div class="mp-text" id="mpText">MP: 300/500</div>
+
+        <!-- Stats -->
+        <div class="stats-container">
+            PA: <span id="pa">6</span> |
+            PM: <span id="pm">3</span> |
+            PO: <span id="po">1-5</span>
+        </div>
+
+        <!-- Combat Grid -->
+        <div class="combat-grid"></div>
+
+        <!-- Monsters -->
+        <div class="monster monster-1" onclick="attackMonster(1)">👹</div>
+        <div class="monster monster-2" onclick="attackMonster(2)">👹</div>
+        <div class="monster monster-3" onclick="attackMonster(3)">👹</div>
+
+        <!-- Player -->
+        <div class="player">⚔️</div>
+
+        <!-- Resources -->
+        <div class="resource resource-1 tree" onclick="gatherResource('tree', 1)">
+            <div class="tree-leaves"></div>
+            <div class="tree-trunk"></div>
+        </div>
+
+        <div class="resource resource-2 tree" onclick="gatherResource('tree', 2)">
+            <div class="tree-leaves"></div>
+            <div class="tree-trunk"></div>
+        </div>
+
+        <div class="resource ore" onclick="gatherResource('ore', 1)"></div>
+
+        <!-- Mini Map -->
+        <div class="minimap">
+            <div class="minimap-player"></div>
+        </div>
+
+        <!-- Inventory Button -->
+        <div class="inventory-btn" onclick="openInventory()">🎒</div>
+
+        <!-- Info Panel -->
+        <div class="info-panel">
+            <div class="info-title">🎮 Mock Dofus UI - Test Mode</div>
+            <div>Niveau: 50 | Classe: Iop</div>
+            <div>Kamas: 1,234,567</div>
+            <div>XP: 45,678 / 100,000</div>
+        </div>
+    </div>
+
+    <script>
+        // Animation HP/MP bars
+        let hp = 750;
+        let maxHp = 1000;
+        let mp = 300;
+        let maxMp = 500;
+        let pa = 6;
+        let pm = 3;
+
+        function updateBars() {
+            const hpPercent = (hp / maxHp) * 100;
+            const mpPercent = (mp / maxMp) * 100;
+
+            document.getElementById('hpBar').style.width = hpPercent + '%';
+            document.getElementById('mpBar').style.width = mpPercent + '%';
+
+            document.getElementById('hpText').textContent = `HP: ${hp}/${maxHp}`;
+            document.getElementById('mpText').textContent = `MP: ${mp}/${maxMp}`;
+        }
+
+        function attackMonster(id) {
+            if (pa > 0) {
+                pa -= 3;
+                hp -= Math.floor(Math.random() * 50) + 10;
+                hp = Math.max(0, hp);
+                updateBars();
+                updateStats();
+                console.log(`Attaque monstre ${id}! PA: ${pa}, HP: ${hp}`);
+            }
+        }
+
+        function gatherResource(type, id) {
+            if (pa > 0) {
+                pa -= 1;
+                mp -= 20;
+                mp = Math.max(0, mp);
+                updateBars();
+                updateStats();
+                console.log(`Récolte ${type} ${id}! PA: ${pa}`);
+            }
+        }
+
+        function openInventory() {
+            alert('📦 Inventaire ouvert (mock)');
+        }
+
+        function updateStats() {
+            document.getElementById('pa').textContent = pa;
+            document.getElementById('pm').textContent = pm;
+        }
+
+        // Animation aléatoire HP/MP
+        setInterval(() => {
+            hp += Math.floor(Math.random() * 20) - 10;
+            hp = Math.min(maxHp, Math.max(0, hp));
+
+            mp += Math.floor(Math.random() * 15) - 5;
+            mp = Math.min(maxMp, Math.max(0, mp));
+
+            updateBars();
+        }, 3000);
+
+        // Régénération PA/PM
+        setInterval(() => {
+            if (pa < 6) pa++;
+            if (pm < 3) pm++;
+            updateStats();
+        }, 5000);
+
+        // Initial update
+        updateBars();
+        updateStats();
+
+        console.log('🎮 Mock Dofus UI - Ready for testing!');
+        console.log('📸 Use this page to test screenshot capture without game running');
+    </script>
+</body>
+</html>

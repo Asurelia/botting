@@ -67,6 +67,23 @@ class AMDDeviceManager:
 
     def _setup_device(self) -> torch.device:
         """Configure le device optimal pour AMD"""
+        # Priorité 1: ROCm natif (meilleure performance AMD)
+        if torch.cuda.is_available():
+            # Vérifier si c'est vraiment ROCm ou CUDA
+            try:
+                device_name = torch.cuda.get_device_name(0).lower()
+                if 'amd' in device_name or 'radeon' in device_name:
+                    device = torch.device("cuda")  # ROCm utilise l'API cuda
+                    logger.info(f"ROCm AMD device configuré: {device_name}")
+                    return device
+                else:
+                    logger.info(f"NVIDIA CUDA device détecté: {device_name}")
+                    device = torch.device("cuda")
+                    return device
+            except Exception as e:
+                logger.warning(f"Détection GPU échouée: {e}")
+
+        # Priorité 2: DirectML (Windows AMD fallback)
         if self.config.use_directml and HAS_DIRECTML:
             try:
                 device = torch_directml.device()
@@ -74,12 +91,6 @@ class AMDDeviceManager:
                 return device
             except Exception as e:
                 logger.warning(f"Échec DirectML: {e}")
-
-        # Fallback vers CUDA si disponible
-        if torch.cuda.is_available():
-            device = torch.device("cuda")
-            logger.info(f"CUDA device utilisé: {device}")
-            return device
 
         # Fallback vers CPU
         device = torch.device("cpu")
@@ -89,21 +100,27 @@ class AMDDeviceManager:
     def _setup_optimizations(self):
         """Configure les optimisations spécifiques AMD/AlphaStar"""
         # Configuration mémoire
-        if self.device.type != "cpu":
+        if self.device.type not in ["cpu", "privateuseone"]:  # privateuseone = DirectML
             try:
                 # Réserver fraction de mémoire configurée
-                if hasattr(torch.cuda, 'set_memory_fraction'):
-                    torch.cuda.set_memory_fraction(self.config.memory_fraction)
+                if hasattr(torch.cuda, 'set_per_process_memory_fraction'):
+                    # Utiliser device index 0 par défaut
+                    device_id = 0 if self.device.type == 'cuda' else self.device
+                    torch.cuda.set_per_process_memory_fraction(
+                        self.config.memory_fraction,
+                        device=device_id
+                    )
 
-                # Activer cuDNN benchmark pour optimisation
+                # Activer cuDNN benchmark pour optimisation (compatible ROCm via MIOpen)
                 if hasattr(torch.backends.cudnn, 'benchmark'):
                     torch.backends.cudnn.benchmark = True
+                    logger.info("cuDNN/MIOpen benchmark activé")
             except Exception as e:
                 logger.warning(f"Optimisations mémoire échouées: {e}")
 
         # Configuration pour mixed precision
         if self.config.use_mixed_precision:
-            logger.info("Mixed precision activée pour AMD")
+            logger.info("Mixed precision activée pour AMD/ROCm")
 
     def _get_device_properties(self) -> Dict[str, Any]:
         """Récupère les propriétés du device"""
@@ -243,8 +260,10 @@ class AMDOptimizedAttention(nn.Module):
 
         batch_size, seq_len, _ = hidden_states.shape
 
-        # Projections avec mixed precision automatique
-        with torch.cuda.amp.autocast(enabled=config.amd.use_mixed_precision):
+        # Projections avec mixed precision automatique (compatible ROCm)
+        # Note: torch.cuda.amp fonctionne avec ROCm depuis PyTorch 2.0+
+        with torch.amp.autocast(device_type='cuda' if hidden_states.device.type == 'cuda' else 'cpu',
+                                enabled=config.amd.use_mixed_precision):
             query_states = self.q_proj(hidden_states)
             key_states = self.k_proj(hidden_states)
             value_states = self.v_proj(hidden_states)
@@ -327,7 +346,8 @@ class AMDOptimizedMLP(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward optimisé avec SwiGLU"""
-        with torch.cuda.amp.autocast(enabled=config.amd.use_mixed_precision):
+        with torch.amp.autocast(device_type='cuda' if x.device.type == 'cuda' else 'cpu',
+                                enabled=config.amd.use_mixed_precision):
             gate = self.gate_proj(x)
             up = self.up_proj(x)
 
@@ -369,7 +389,7 @@ class HRMReasoningBlock(nn.Module):
         self.post_attention_layernorm = RMSNorm(hidden_size)
 
         # Gradient checkpointing support
-        self.gradient_checkpointing = config.amd.enable_gradient_checkpointing
+        self.gradient_checkpointing = config.amd.use_gradient_checkpointing
 
     def forward(self,
                 hidden_states: torch.Tensor,
@@ -598,7 +618,8 @@ class HRMAMDModel(nn.Module):
 
         # System 1: Raisonnement rapide
         system_one_start = time.time()
-        with torch.cuda.amp.autocast(enabled=config.amd.use_mixed_precision):
+        device_type = 'cuda' if hidden_states.device.type == 'cuda' else 'cpu'
+        with torch.amp.autocast(device_type=device_type, enabled=config.amd.use_mixed_precision):
             system_one_output = self.system_one(
                 hidden_states,
                 attention_mask=attention_mask,
@@ -612,7 +633,7 @@ class HRMAMDModel(nn.Module):
 
         # System 2: Raisonnement délibéré
         system_two_start = time.time()
-        with torch.cuda.amp.autocast(enabled=config.amd.use_mixed_precision):
+        with torch.amp.autocast(device_type=device_type, enabled=config.amd.use_mixed_precision):
             final_output, reasoning_steps = self.system_two(
                 hidden_states,
                 system_one_output,

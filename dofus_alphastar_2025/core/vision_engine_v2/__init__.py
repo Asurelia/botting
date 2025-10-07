@@ -1,45 +1,45 @@
 """
 Vision Engine V2 - Vision avancée pour DOFUS AlphaStar
-SAM 2 + TrOCR + Analyse contextuelle optimisée AMD
+SAM 2 + TrOCR + Analyse contextuelle optimisée AMD + Realtime Vision MVP
 """
 
-from .sam_integration import (
-    SAMProcessor,
-    DofusSAMAnalyzer,
-    create_sam_processor
+# Realtime Vision (MVP - fonctionnel)
+from .realtime_vision import (
+    RealtimeVision,
+    create_realtime_vision
 )
 
+# Complete Vision Adapter
+from .vision_complete_adapter import (
+    VisionCompleteAdapter,
+    create_vision_complete_adapter
+)
+
+# TrOCR Integration
 from .trocr_integration import (
+    TextDetection,
     TrOCRProcessor,
-    DofusTextRecognizer,
-    create_trocr_processor
+    DofusTextRecognizer
 )
 
-from .unified_vision import (
-    UnifiedVisionEngine,
-    VisionResult,
-    DofusSceneAnalysis,
-    create_vision_engine
+# SAM Integration
+from .sam_integration import (
+    SAMSegment,
+    SAMProcessor
 )
 
-from .spatial_reasoning import (
-    SpatialReasoner,
-    BattlefieldAnalyzer,
-    NavigationPlanner
-)
+# Alias pour compatibilité
+create_vision_engine = create_vision_complete_adapter
 
 __all__ = [
-    "SAMProcessor",
-    "DofusSAMAnalyzer",
-    "create_sam_processor",
+    "RealtimeVision",
+    "create_realtime_vision",
+    "VisionCompleteAdapter",
+    "create_vision_complete_adapter",
+    "create_vision_engine",
+    "TextDetection",
     "TrOCRProcessor",
     "DofusTextRecognizer",
-    "create_trocr_processor",
-    "UnifiedVisionEngine",
-    "VisionResult",
-    "DofusSceneAnalysis",
-    "create_vision_engine",
-    "SpatialReasoner",
-    "BattlefieldAnalyzer",
-    "NavigationPlanner"
+    "SAMSegment",
+    "SAMProcessor"
 ]

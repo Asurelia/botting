@@ -1,0 +1,111 @@
+{
+  "ui_hp_mp_bars.png": {
+    "hp_bar": {
+      "bbox": [
+        10,
+        10,
+        200,
+        20
+      ],
+      "value": 0.75
+    },
+    "mp_bar": {
+      "bbox": [
+        10,
+        35,
+        200,
+        20
+      ],
+      "value": 0.6
+    },
+    "stats": {
+      "pa": 6,
+      "pm": 3,
+      "po_min": 1,
+      "po_max": 5
+    }
+  },
+  "combat_with_monsters.png": {
+    "monsters": [
+      {
+        "bbox": [
+          700,
+          330,
+          60,
+          60
+        ],
+        "class": "monster",
+        "confidence": 1.0
+      },
+      {
+        "bbox": [
+          760,
+          390,
+          60,
+          60
+        ],
+        "class": "monster",
+        "confidence": 1.0
+      }
+    ],
+    "player": {
+      "position": [
+        550,
+        540
+      ]
+    },
+    "grid": {
+      "bbox": [
+        400,
+        150,
+        600,
+        480
+      ],
+      "cell_size": 60
+    }
+  },
+  "farming_resources.png": {
+    "resources": [
+      {
+        "bbox": [
+          665,
+          365,
+          70,
+          70
+        ],
+        "class": "tree",
+        "confidence": 1.0
+      },
+      {
+        "bbox": [
+          715,
+          415,
+          70,
+          70
+        ],
+        "class": "tree",
+        "confidence": 1.0
+      },
+      {
+        "bbox": [
+          465,
+          265,
+          70,
+          70
+        ],
+        "class": "ore",
+        "confidence": 1.0
+      },
+      {
+        "bbox": [
+          565,
+          465,
+          70,
+          70
+        ],
+        "class": "plant",
+        "confidence": 1.0
+      }
+    ]
+  }
+}

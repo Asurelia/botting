@@ -8,7 +8,8 @@ from .hrm_amd_core import (
     HRMSystemOne,
     HRMSystemTwo,
     AMDDeviceManager,
-    AMDOptimizationConfig
+    HRMOutput,
+    create_hrm_model
 )
 
 from .hrm_dofus_adapter import (
@@ -23,7 +24,8 @@ __all__ = [
     "HRMSystemOne",
     "HRMSystemTwo",
     "AMDDeviceManager",
-    "AMDOptimizationConfig",
+    "HRMOutput",
+    "create_hrm_model",
     "DofusHRMAgent",
     "DofusGameState",
     "DofusAction",

@@ -1,0 +1,14 @@
+# Ignore images and videos (too large for git)
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.avi
+*.mkv
+
+# Keep annotations
+!annotations/*.json
+
+# Keep README
+!README.md
+!.gitignore

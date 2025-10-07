@@ -13,6 +13,7 @@ from enum import Enum
 from pathlib import Path
 
 import numpy as np
+import torch
 
 from config import config
 from core.hrm_reasoning import create_hrm_model, HRMOutput
